@@ -9,15 +9,15 @@
 \begin{document}
 
 % Make title
-%\input{Title/title}
+\input{Title/title}
 
 %Abstract
-%\input{Title/abstract}
+\input{Title/abstract}
 
 %Start counting in roman numbers
 \pagenumbering{roman}
 
-%Table of contents
+%Table of contentszx
 \begingroup
     \hypersetup{linkcolor=black}
     \pagenumbering{gobble}
@@ -25,7 +25,26 @@
     \tableofcontents
 \endgroup
 
-h
+
+\chapter*{Introduction}
+\markboth{INTRODUCTION}{}
+\addcontentsline{toc}{chapter}{Introduction}
+%Start counting in arabic numbers
+\pagenumbering{arabic}
+\chapter{Experimental Setup}
+\section{The Qubit}
+\section{Readout}
+\section{Tunable Couplers}
+\section{Our Chip}
+f
+\newpage
+g
+
+\chapter{Protocols for 2 qubit gates}
+\section{Storage-Storage}
+\section{Storage-Emitter}
+\subsection{SWAP}
+\subsection{CNOT}
 
 %Print bibliography
 \printbibliography[heading=bibintoc]
