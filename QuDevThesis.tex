@@ -1,0 +1,33 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{Settings}
+
+%Add Bibliography
+\addbibresource{Bibliography.bib}
+
+
+
+\begin{document}
+
+% Make title
+%\input{Title/title}
+
+%Abstract
+%\input{Title/abstract}
+
+%Start counting in roman numbers
+\pagenumbering{roman}
+
+%Table of contents
+\begingroup
+    \hypersetup{linkcolor=black}
+    \pagenumbering{gobble}
+    \renewcommand\contentsname{\bfseries Contents}
+    \tableofcontents
+\endgroup
+
+h
+
+%Print bibliography
+\printbibliography[heading=bibintoc]
+
+\end{document}
