@@ -1,15 +1,17 @@
 % Use packages ----------------------------------
 \usepackage[english]{babel}
 \usepackage{newlfont}
+\usepackage{lipsum}
 \usepackage{color}
+\usepackage{braket}
 \usepackage{pdfpages}
+\usepackage{caption}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{multirow}
 \usepackage{wrapfig}
-\usepackage{caption}
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{gettitlestring}
@@ -41,14 +43,14 @@
 \tikzset{every picture/.style={line width=0.75pt}}
 % Bibliography
 \usepackage[
-backend=biber,
-style=alphabetic,
+backend=bibtex,
+style=numeric,
 sorting=anyt
 ]{biblatex}
 \DeclareDelimFormat[bib]{multinamedelim}{\addcomma\space}
 \DeclareDelimAlias[bib]{finalnamedelim}{multinamedelim}
 \usepackage[a4paper, centering,
-total={5.4in, 8.18in},
+total={13.8cm, 20.8cm},
 nomarginpar,
 headheight=3cm,
 ]{geometry}
@@ -67,24 +69,25 @@ headheight=3cm,
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot{}
+\setlength{\footskip}{1.5cm}
 \renewcommand\footrule{
   \begin{minipage}{\textwidth}
     \centering
-    \begin{tikzpicture}
-      % Function
-      \draw[black, domain=-6.8:6.8, samples=1000] plot (\x, {0.5*cos(25*\x r) * exp(-3*\x*\x)});
+    \begin{tikzpicture} % Rememmber to put 2000 samples at the end, nto now bc it's slowing doen a lot
+      \draw[black, domain=-6.9:6.9, samples=10] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
     \end{tikzpicture}
+    \vspace{-0.6cm}
   \end{minipage}\par}%
 \renewcommand{\footrulewidth}{0pt}
 \fancyfoot[R]{\thepage}
 
 %Chapters and sections' format ---------------------------
-\titleformat{\chapter}[display]
-{\Large\scshape}
-  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titleformat*{\section}{\Large\scshape}
-\titleformat*{\subsection}{\large\scshape}
-\titleformat*{\subsubsection}{\normalsize \bfseries}
+% \titleformat{\chapter}[display]
+% {\Large\scshape}
+%   {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+% \titleformat*{\section}{\Large\scshape}
+% \titleformat*{\subsection}{\large\scshape}
+% \titleformat*{\subsubsection}{\normalsize \bfseries}
 
 % Define ETH colors --------------------------------------
 \definecolor{ETHblue}{RGB}{33, 92, 175}
@@ -93,3 +96,6 @@ headheight=3cm,
 \definecolor{ETHred}{RGB}{183, 53, 45}
 
 %New Commands ----------------------------------------------
+\newcommand{\g}{\ensuremath{\ket{g}}}
+\newcommand{\e}{$\ket{e}$}
+\newcommand{\f}{$\ket{f}$}
