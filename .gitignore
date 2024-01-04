@@ -409,3 +409,5 @@ FodyWeavers.xsd
 *.fdb_latexmk
 *.fls
 *.xdv
+QuDevThesis-blx.bib
+QuDevThesis.run.xml
