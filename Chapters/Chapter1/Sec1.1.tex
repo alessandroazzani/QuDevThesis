@@ -1,0 +1,58 @@
+\section{The Qubit}
+\label{sec:qubit}
+
+The basic idea behind the implementation of a quantum device for quantum information is realizing a 2-level quantum system.
+In the Quantum Device Lab this is done through superconducting circuits.
+The qubits are star-shaped transmon qubits \cite{transmon_qubits}.
+They are characterized by a large capacitor and a SQUID (see \cref{fig:transmon_circuit}).
+The latter is flux-tunable and it is made out of two Josephson junctions in parallel.
+\begin{figure}[htbp]
+    \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \include{Figures/transmon_diagram}
+      \captionsetup{skip=-20pt}
+      \caption{Circuit diagram of a transmon qubit}
+      \label{fig:transmon_circuit}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[width = 0.5 \textwidth]{Images/Chap1/Qubit_energy.png}
+      \caption{Energy spectrum relative to $N_g$}
+      \label{fig:qubit_energy}
+    \end{minipage}
+  \end{figure}
+  
+
+The Hamiltonian representing the dynamics of such a transmon is 
+\begin{equation}
+    \hat{H} = E_C (\hat{N} - N_g)^2 - E_{J_0, \text{max}} \cos(\pi\frac{\Phi_{\text{ext}}}{\Phi_0})\cos\hat{\delta}
+\end{equation}
+where $\hat{N}$ is the operator of number of Cooper pairs in the island and $\hat{\delta}$ is the phase operator of the transmon.
+This can be seen as a non-linear harmonic oscillator.
+
+By changing the external magnetic flux through the SQUID $\Phi_\text{ext}$, it's possible to change the energy splitting between the first two energy levels $\ket{g}$ and $\ket{e}$, and thus the frequency of the qubit.
+Furthermore, the anharmonicity allows us to access the first and second transition separately, since they have different energy gaps (see \cref{fig:qubit_energy}).
+Nevertheless, it is important to mention that in our particular setup the qubits are not flux-tunable, because it is not useful for out purposes.
+We will present our setup in more detail in \Cref{sec:our_setup}.
+The qubits are also coupled to a charge line, which is used to perform single-qubits rotations.
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[height=3cm]{Images/Chap1/star_transmon.png}
+      \caption{Star-shaped transmon}
+      \label{fig:stqr_transmon}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[height=3cm]{Images/Chap1/SQUID.jpeg}
+      \caption{Zoom-in of a SQUID loop}
+      \label{fig:squid_loop}
+    \end{subfigure}
+    \caption{Images of the devices used in the lab}
+    \label{fig:transmon_squid_images}
+  \end{figure}
+
+The qubits are star-shaped and made out of niobium(see \cref{fig:transmon_squid_images}), fabricated on a silicon substrate.

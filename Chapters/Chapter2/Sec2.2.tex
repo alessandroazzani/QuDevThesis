@@ -1,0 +1,49 @@
+
+\section{Storage-Storage}
+\label{sec:S-S}
+
+In the S-S system, the extended lifetime of the two qubits allows us to execute single-qubit gates on them.
+Additionally, the capability to perform $2\pi$ rotations on the sidebands of this two-qubit system enables the implementation of a CZ gate within the S-S system.
+
+\begin{figure}
+    \centering
+    \include{Figures/SS_levels}
+    \vspace{-1cm}
+    \caption{Level diagram of storage-storage interaction}
+    \label{fig:SS_level}
+\end{figure}
+
+In \cref{fig:SS_level}, the energy levels of the two-qubits system is shown, together with some single- and two-qubit gates that we can run on them.
+
+\subsection{CZ}
+
+The unitary matrix representing a controlled-phase gate, or CZ, is
+\begin{equation}
+    U_{\text{CZ}} = 
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & -1 \\
+\end{pmatrix}.
+\end{equation}
+
+It performs the operation
+\begin{equation}
+    (\alpha \ket{gg} + \beta \ket{ge} + \gamma \ket{eg} + \delta \ket{ee})_{\text{S}_1 \text{S}_2} \xrightarrow{U_{\text{CZ}}}
+    (\alpha \ket{gg} + \beta \ket{ge} + \gamma \ket{eg} - \delta \ket{ee})_{\text{S}_1 \text{S}_2} . 
+\end{equation}
+
+The operational sequence on our device involves transferring population between the states $\ket{ee}$ and $\ket{fg}$ within the S-S system.
+After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but with an opposite phase.
+
+This gate isn't feasible within the S-E system as it necessitates a full $2\pi$ rotation, which isn't reliably achievable.
+Moreover, it doesn't make sense as we can't distinguish between a CZ gate and an identity gate, given our inability to sustain the $\ket{e1}$ state.
+
+\begin{figure}
+    \centering
+    \include{Figures/CZ_SS}
+    \vspace{-1cm}
+    \caption{Protocol for S-S CZ gate}
+    \label{fig:SS_CZ}
+\end{figure}

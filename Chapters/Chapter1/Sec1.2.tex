@@ -1,0 +1,25 @@
+\section{Dispersive Readout}
+\label{sec:readout}
+
+The readout mechanism allows us to measure the state of the qubit in a non-demolishing way \cite{singleshot_readout}.
+In our experiments this is needed in order to characterize the device and for calibration purposes.
+
+The transmon our capacitively coupled to a readout resonator, which is a waveguide on our device.
+By sending through this waveguide a signal far detuned from the qubit's frequency, its frequency will slightly change depending on the state of the qubit, without interfering with the state of the latter.
+This process ids described by the James-Cummins Hamiltonian
+\begin{equation}
+    \hat{H} = \hbar \omega_r \hat{a}^\dagger \hat{a} + \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}^z + \hbar g (\hat{a}^\dagger \hat{\sigma}^- + \hat{a} \hat{\sigma}^+) ,
+\end{equation}
+which models the coupling between a 2-level system and a light mode in a cavity.
+Thus, by measuring the frequency shift of the readout resonator, we are able to infer the qubit's state.
+
+In order to not let the qubit couple too strongly to the environment through the readout resonator, a Purcell filter is applied between the resonator and the qubit (see \cref{fig:diagram_storage_qubit}).
+This allows to keep the lifetimes of the qubits longer, by suppressing spontaneous emission due to the Purcell effect \cite{Purcell_effect}.
+
+\begin{figure}
+    \centering
+    \include{Figures/Readout_diagram}
+    \vspace{-1cm}
+    \caption{Diagram representing a storage qubit and their readout mechanism}
+    \label{fig:diagram_storage_qubit}
+\end{figure}

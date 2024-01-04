@@ -28,100 +28,17 @@
 \include{Chapters/introduction}
 %Start counting in arabic numbers
 \pagenumbering{arabic}
-\chapter{Experimental Setup}
-\label{Chap:experimental}
 
-In this chapter we introduce the experimental setup used for our experiments.
-We start by presenting the design of our implementation of a qubit: the Transmon.
-Then we will show how the qubit is driven for our purposes, in particular how to perform readout and 2-qubit gates.
+\input{Chapters/Chapter1/Chap1}
+\input{Chapters/Chapter2/Chap2}
 
-Finally we put everything together and present the chip used for quantum entangling and photon emission.
 
-\section{The Qubit}
-\label{sec:qubit}
+\chapter{Three graph state}
 
-The basic idea behind the implementation of a quantum device for quantum information is realizing a 2-level quantum system.
-In the Quantum Device Lab this is done through superconducting circuits.
-The qubits are star-shaped transmon qubits \cite{transmon_qubits}.
-They are characterized by a large capacitor and a SQUID (see \cref{fig:transmon_circuit}).
-The latter is flux-tunable and it is made out of two Josephson junctions in parallel.
-\begin{figure}[htbp]
-    \begin{minipage}[b]{0.5\linewidth}
-      \centering
-      \include{Figures/transmon_diagram}
-      \captionsetup{skip=-20pt}
-      \caption{Circuit diagram of a transmon qubit}
-      \label{fig:transmon_circuit}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.45\linewidth}
-      \centering
-      \includegraphics[width = 0.5 \textwidth]{Images/Chap1/Qubit_energy.png}
-      \caption{Energy spectrum relative to $N_g$}
-      \label{fig:qubit_energy}
-    \end{minipage}
-  \end{figure}
-  
+\section{graph states}
+\section{logical operatioin}
+\section{How to build it}
 
-The Hamiltonian representing the dynamics of such a transmon is 
-\begin{equation}
-    \hat{H} = E_C (\hat{N} - N_g)^2 - E_{J_0, \text{max}} \cos(\pi\frac{\Phi_{\text{ext}}}{\Phi_0})\cos\hat{\delta}
-\end{equation}
-where $\hat{N}$ is the operator of number of Cooper pairs in the island and $\hat{\delta}$ is the phase operator of the transmon.
-This can be seen as a non-linear harmonic oscillator.
-
-By changing the external magnetic flux through the SQUID $\Phi_\text{ext}$, it's possible to change the energy splitting between the first two energy levels $\ket{g}$ and $\ket{e}$, and thus the frequency of the qubit.
-Furthermore, the anharmonicity allows us to access the first and second transition separately, since they have different energy gaps (see \cref{fig:qubit_energy}).
-Nevertheless, it is important to mention that in our particular setup the qubits are not flux-tunable, because it is not useful for out purposes.
-We will present our setup in more detail in \Cref{sec:our_setup}.
-\begin{figure}[t]
-    \centering
-    \begin{subfigure}[b]{0.45\linewidth}
-      \centering
-      \includegraphics[height=3cm]{Images/Chap1/star_transmon.png}
-      \caption{Star-shaped transmon}
-      \label{fig:stqr_transmon}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\linewidth}
-      \centering
-      \includegraphics[height=3cm]{Images/Chap1/SQUID.jpeg}
-      \caption{Zoom-in of a SQUID loop}
-      \label{fig:squid_loop}
-    \end{subfigure}
-    \caption{Images of the devices used in the lab}
-    \label{fig:transmon_squid_images}
-  \end{figure}
-
-The qubits are star-shaped and made out of niobium(see \cref{fig:transmon_squid_images}), fabricated on a silicon substrate.
-
-\section{Dispersive Readout}
-\label{sec:readout}
-
-The readout mechanism allows us to measure the state of the qubit in a non-demolishing way \cite{singleshot_readout}.
-In our experiments this is needed in order to characterize the device and for calibration purposes.
-
-The transmon our capacitively coupled to a readout resonator, which is a waveguide on our device.
-By sending through this waveguide a signal far detuned from the qubit's frequency, its frequency will slightly change depending on the state of the qubit, without interfering with the state of the latter.
-This process ids described by the James-Cummins Hamiltonian
-\begin{equation}
-    \hat{H} = \hbar \omega_r \hat{a}^\dagger \hat{a} + \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}^z + \hbar g (\hat{a}^\dagger \hat{\sigma}^- + \hat{a} \hat{\sigma}^+) ,
-\end{equation}
-which models the coupling between a 2-level system and a light mode in a cavity.
-Thus, by measuring the frequency shift of the readout resonator, we are able to infer the qubit's state.
-
-In order to not let the qubit couple too strongly to the environment through the readout resonator, a Purcell filter is applied between the resonator and the qubit.
-This allows to keep the lifetimes fo the qubits long, by suppressing spontaneous emission due to the Purcell effect \cite{Purcell_effect}.
-
-\section{Tunable Couplers}
-\section{Our Chip}
-\label{sec:our_setup}
-
-\chapter{Protocols for 2 qubit gates}
-\section{Storage-Storage}
-\section{Storage-Emitter}
-\subsection{SWAP}
-\subsection{CNOT}
 
 %Print bibliography
 \printbibliography[heading=bibintoc]
