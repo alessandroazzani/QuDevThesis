@@ -1,0 +1,100 @@
+\section{Storage-Emitter}
+\label{sec:S-E}
+
+In \cref{fig:level_S-E} we illustrate the level diagram for a storage-emitter (S-E) system.
+\begin{figure}[h]
+    \centering
+    \include{Figures/SE_levels}
+    \vspace{-1cm}
+    \caption{Level diagram of storage-emitter interaction}
+    \label{fig:level_S-E}
+\end{figure}
+
+We label the levels of the storage qubit with $\ket{g}, \ket{e}, \ket{f}$ and those of the emitter as $\ket{0}, \ket{1}$.
+Due to the rapid emission of the emitter, the second excited level $\ket{2}$ is not relevant for our purposes.
+In addition, we cannot run single-qubit gates on the emitter.
+The only operations we can execute are single-qubits gate on the storage qubit and two-qubit gates that do not require single-qubit gates on the emitter.
+In other words, we can only transfer the excitation from the storage to the emitter.
+
+The two-qubit gates we are able to execute considering the limitations of our device are SWAP and controlled emission (or CNOT).
+
+\subsection{SWAP}
+
+\begin{figure}
+    \centering
+    \include{Figures/SWAP_SE}
+    \vspace{-1cm}
+    \caption{Protocol for executing an S-E SWAP gate}
+    \label{fig:S-E_SWAP}
+\end{figure}
+
+The simplest two-qubit gate executable on an S-E pair is the SWAP gate. 
+It facilitates the mapping of the storage qubit's state onto the emitter qubit, consequently leading to photon emission through spontaneous decay into the emission line of the ladder.
+
+Another application of this gate is device resetting.
+Given the emitter qubit's rapid decay, typically residing in the ground state, the SWAP gate reliably resets the storage qubit's state to the ground state.
+
+The unitary matrix representing the SWAP gate is
+\begin{equation}
+    U_{\text{SWAP}} = 
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{pmatrix}.
+\end{equation}
+
+This implements the operation
+\begin{equation}
+    \ket{\psi}_{\text{S}} \ket{0}_{\text{E}} \xrightarrow{U_{\text{SWAP}}}
+    \ket{g}_{\text{S}} \ket{\psi}_{\text{E}}
+\end{equation}
+which transfer the quantum state of the storage in the emitter qubit, leaving the former in its ground state.
+
+The depicted sequence shown in \cref{fig:S-E_SWAP} illustrates the operations required to execute the SWAP gate between a storage and an emitter.
+First, an arbitrary state is prepared on the storage qubit through single-qubit operations.
+Following this, a $\pi$ rotation is induced within the $e0$-$g1$ manifold of the two-qubit system.
+Lastly, upon decay of the emitter qubit, a photon is emitted in the emission line, preserving the state initially encoded by the storage qubit.
+
+\subsection{CNOT}
+
+The other operation that we can run between storage and emitter qubits is a controlled emission, or CNOT.
+The unitary matrix representing this operation is
+\begin{equation}
+    U_{\text{CNOT}} = 
+    \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+\end{pmatrix}.
+\end{equation}
+
+A photon is emitted form the emitter qubit only if the storage qubit is in the excited state $\ket{e}$, otherwise no photon is emitted.
+Thus, it performs the operation
+\begin{equation}
+    \ket{\psi}_{\text{S}} \ket{0}_{\text{E}} = 
+    (\alpha \ket{g0} + \beta \ket{e0})_{\text{SE}} \xrightarrow{U_{\text{CNOT}}}
+    (\alpha \ket{g0} + \beta \ket{e1})_{\text{SE}} .
+\end{equation}
+
+This observation highlights that, since the final state cannot be expressed as a tensor product of two individual pure states, the resulting state is entangled.
+
+\begin{figure}
+    \centering
+    \include{Figures/CNOT_SE}
+    \vspace{-1cm}
+    \caption{Protocol for S-E CNOT gate}
+    \label{fig:SE_CNOT}
+\end{figure}
+
+Due to the strong coupling between the emitter and the emission line, we cannot depend on operations that involve transferring population to the emitter qubit and its subsequent return.
+Essentially, our capability allows only for a $\pi$ rotation between the storage and emitter qubits.
+Hence, in executing a CNOT gate within our protocol, the initial step involves population transfer from the $e0$ to the $f0$ state through a single-qubit $\pi$ rotation. 
+Subsequently, a $\pi$ rotation within the $f0$-$e1$ manifold is performed, effectively transferring the state from the $e0$ level to the $e1$ level within the two-qubit system.
+
+The protocol employed for executing the controlled emission is depicted in \cref{fig:SE_CNOT}.
+Within the diagram, the entanglement between the two qubits is denoted by a red line. We will discuss what we mean by entanglement when dealing with graph states in \textcolor{red}{reference section}.
+
+Please note, this method effectively executes a CNOT gate within the S-E manifold, operating under the assumption that the emitter qubit is predominantly in its ground state $\ket{0}$, a condition frequently observed.
