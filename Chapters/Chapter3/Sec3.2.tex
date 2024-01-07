@@ -1,0 +1,169 @@
+\section{Logical Operations on Graph States}
+\label{Sec:log_operation_graph}
+
+In \cref{chap:2_qubit_gates}, we delved into the protocols employed to implement two-qubit gates on our device.
+Additionally, we explored the constraints that limit our ability to execute certain other gate operations.
+
+This section provides a deeper exploration of gates applied to graph states. 
+Frequently, rather than directly applying the specific gate, we utilize an alternative operation that produces an equivalent effect for a particular initial state.
+
+For instance, the Hadamard gate $H$ and a $\pi / 2$ rotation around the $y$ axis are different gates, as we can see from the different unitary matrices
+\begin{equation}
+    H = \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{bmatrix} , \quad
+    R_y(\pi / 2) = \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+        1 & -1 \\
+        1 & 1
+    \end{bmatrix} .
+\end{equation}
+
+However, when these gates are applied to the initial state $\ket{0}$, they yield identical resulting states:
+\begin{equation}
+    H \ket{0} = R_y(\pi/2) \ket{0} = \ket{+} .
+\end{equation}
+
+In our experiments, given our inability to implement Hadamard gates directly on our device, we simulate its effect by executing rotations around the $y$ axis.
+In general, the only single-qubit gates we can perform are rotations around the $x$, $y$, and $z$ axis. 
+Fortunately, these gates often suffice for our purposes.
+
+However, we need to be cautious as substituting all Hadamard gates with $\pi / 2$ rotations around the $y$ axis might not cover all situations. 
+Take, for instance, the following:
+\begin{equation}
+    H H \ket{0} \neq
+    R_y(\pi / 2) R_y(\pi / 2) \ket{0} .
+\end{equation}
+
+To ensure this equality holds, we need to alternate rotations of $\pi /2$ and $-\pi / 2$, as follows:
+\begin{equation}
+    H H \ket{0} =
+    R_y(- \pi / 2) R_y(\pi / 2) \ket{0} .
+\end{equation}
+
+Now, let us revisit the two-qubit gates covered in \cref{chap:2_qubit_gates}:SWAP, CNOT, and SWAP.
+We will analyze their implementation methods to achieve the intended graph state as the final outcome.
+
+\subsection{CZ}
+
+The simplest among these gates is the CZ gate, given that graph states are formulated based on this specific gate. 
+If our goal is to obtain the state depicted in \cref{fig:CZ_graph} as an outcome, we aim to execute operations on the qubits such as:
+\begin{equation}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{1} & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \qw
+    \end{quantikz}
+\end{equation}
+Fortunately, replacing the Hadamard gates with rotations around the $y$ axis for both qubits accomplishes this task:
+\begin{equation}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}} & \ctrl{1} & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_{\pi / 2}} & \control{} & \qw
+    \end{quantikz}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \include{Figures/Chap3/CZ_graph}
+    \vspace{-1cm}
+    \caption{2-qubits linear graph}
+    \label{fig:CZ_graph}
+\end{figure}
+
+\subsection{SWAP}
+
+When studying the SWAP gate, it's crucial to consider its impact on the entanglement between the qubits involved and their connections to other qubits.
+If our aim is to replicate the functionality of the following circuit
+\begin{equation}
+\label{eq:SWAP_circuit}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{1}   & \qw      & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \swap{1} & \qw \\
+      \lstick{$\ket{0}_3$} & \gate{H} & \qw        & \targX{} & \qw
+    \end{quantikz}
+\end{equation}
+we need to examine the changes occurring in the entanglement between qubits 1 and 2.
+A visual representation is provided in \cref{fig:SWAP_graph}.
+The SWAP gate effectively transfers the entanglement between the qubits, similarly to a simple swap in the numbering of the two qubits.
+
+\begin{figure}[b]
+    \centering
+    \include{Figures/Chap3/SWAP_graph}
+    \vspace{-1cm}
+    \caption{Action of SWAP gate on entangling bonds with neighbouring qubits}
+    \label{fig:SWAP_graph}
+\end{figure}
+
+Another aspect to consider is that we primarily implement the SWAP gate between a storage and an emitter. 
+Consequently, in our example, we will designate qubit 3 as the emitter qubit. 
+This means we're unable to perform single-qubit gates on it due to its rapid state decay.
+We can execute the SPAW gate of \cref{fig:SWAP_graph} and generate an analogue final state by running the following protocol
+\begin{equation}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}} & \ctrl{1}   & \qw      & \qw                & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_{\pi / 2}} & \control{} & \swap{1} & \gate{Y_{\pi / 2}} & \qw \\
+      \lstick{$\ket{0}_3$} & \qw                & \qw        & \targX{} & \qw                & \qw
+    \end{quantikz}
+\end{equation}
+In the circuit architecture, the SWAP gate basically transfers both the state and the entangling bonds from qubit 2 to qubit 3.
+Consequently, to achieve the state represented in \cref{eq:SWAP_circuit}, we need to further apply a Hadamard gate (or a $y$ rotation) on qubit 2 to bring it to the state $\ket{+}$.
+Thus, the CNOT gate, followed by an Hadamard, effectively transfers all entanglement from the control qubit to the target qubit, while also entangling the two qubits, as depicted in \cref{fig:CNOT_graph}.
+
+\begin{figure}
+    \centering
+    \include{Figures/Chap3/CNOT_graph}
+    \vspace{-1cm}
+    \caption{Action of CNOT gate on the entangling bonds of the target qubit}
+    \label{fig:CNOT_graph}
+\end{figure}
+
+\subsection{CNOT}
+
+The situation changes once more when dealing with the CNOT gate.
+The following equivalence between the resulting quantum states can be easily checked:
+\begin{equation}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{1}   & \qw      & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \ctrl{1} & \qw \\
+      \lstick{$\ket{0}_3$} & \gate{H} & \qw        & \targ{}  & \qw
+    \end{quantikz}
+    \; = \;
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{2}   & \qw         & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{H} & \qw        & \ctrl{1}    & \qw \\
+      \lstick{$\ket{0}_3$} & \gate{H} & \control{} & \control{}  & \qw
+    \end{quantikz}
+\end{equation}
+It's worth noting that the equivalence is solely between outcomes, assuming the initial state is $\ket{000}$, not between the quantum circuits themselves.
+In practice, the unitary matrices representing the actions of the two circuits would differ.
+
+To replicate the action of this gate and achieve the same resulting graph state, precise attention must be paid to the phase signs in rotations around the $y$ axis.
+We will maintain the assumption that qubit 3 serves as an emitter qubit, as previously established in the case of the SWAP gate.
+The executable sequence of gates on our device is the following:
+\begin{equation}
+    \begin{quantikz}
+      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}}  & \ctrl{1}   & \qw         & \qw                 & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_{-\pi / 2}} & \control{} & \ctrl{1}    & \gate{Y_{\pi / 2}} & \qw \\
+      \lstick{$\ket{0}_3$} & \qw                 & \qw        & \targ{}     & \qw                 & \qw
+    \end{quantikz}
+\end{equation}
+
+Typically, when multiple Hadamard gates are applied to the same qubit without resetting it through a SWAP gate with an emitter, it becomes necessary to alternate the rotation's sign around the $y$ axis.
+Intuitively, this adjustment is needed because applying two rotations is not equivalent to applying two Hadamard gates, even when the initial state is $\ket{0}$.
+To accurately represent this scenario, we might need to implement a sequence resembling the following:
+\begin{equation}
+    H H \ket{0} =
+    R_y(- \pi / 2) R_y(\pi / 2) \ket{0} =
+    R_y(\pi / 2) R_y(-\pi / 2) \ket{0} .
+\end{equation}
+
+Moreover, it's important to note that the effect of a $y$ rotation and the Hadamard gate differs when applied to the state $\ket{1}$:
+\begin{equation}
+    H \ket{1} = \ket{-} , \quad
+    R_y(\pi / 2) \ket{1} = - \ket{-} .
+\end{equation}
+
+Hence, intuitively, it becomes crucial to alternate the signs of the $\pi/2$ rotation around the $y$ axis, ensuring that the final rotation within the sequence is positive. 
+This alternating pattern ensures proper alignment with the intended quantum operations, particularly when dealing with sequences involving multiple rotations or Hadamard gates on the same qubit.

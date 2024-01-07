@@ -1,0 +1,67 @@
+\section{Definitions}
+\label{Sec:graph_definition}
+
+Graph states can be defined in two ways: through \emph{stabilizer formalism} or using \emph{quantum circuit}.
+
+\subsection{Stabilizer Formalism Definition}
+
+A stabiliser is an operator under which the stabilised state is invariant, and the state is uniquely specified as the simultaneous $+1$ eigenstate of all $N$ stabilisers,
+\begin{equation}
+    S_i \ket{\psi} = \ket{\psi} \quad \forall i \in \{1, \ldots, N\} .
+\end{equation}
+
+A graph state, described by the graph $G = (V, E)$ has stabilizers of the form
+\begin{equation}
+    S_i = X_i \otimes_{j \in \mathcal{N}(i)} Z_j ,
+\end{equation}
+for each node $i$ of the graph, where $\mathcal{N}(i)$ denotes the neighbourhood of the node $i$.
+
+\begin{figure}
+    \centering
+    \include{Figures/Simple_graph}
+    \vspace{-1cm}
+    \caption{A $3$-qubits linear graph state}
+    \label{fig:simple_3_graph}
+\end{figure}
+
+As an example, consider the graph in \cref{fig:simple_3_graph}.
+The graph state $\ket{G}$ has the stabilizers of the form
+\begin{align}
+    S_1 &= X_1 \otimes Z_2 , \notag \\
+    S_2 &= Z_1 \otimes X_2 \otimes Z_3 , \label{eq:stabilizers} \\
+    S_3 &= Z_2 \otimes X_3 , \notag
+\end{align}
+meaning that
+\begin{equation}
+    S_1 \ket{G} = 
+    S_2 \ket{G} = 
+    S_3 \ket{G} = 
+    \ket{G} .
+\end{equation}
+
+\subsection{Quantum Circuit Definition}
+
+An alternative and equivalent definition is the following.
+
+Given a graph $G = (V, E)$, the graph state $\ket{G}$ is defined by
+\begin{equation}
+    \ket{G} = \prod_{\substack{\{ a, b \} \in E}} 
+    CZ_{a, b} \ket{+}^{\otimes V} ,
+\end{equation}
+where $CZ_{a, b}$ is the controlled-phase operator between the vertices $a$ and $b$, and 
+\begin{equation}
+    \ket{+} = H \ket{0} = \frac{1}{\sqrt{2}} (\ket{0} + \ket{1}) .
+\end{equation}
+
+For instance, the state in \cref{fig:simple_3_graph} is
+\begin{align}
+    \ket{G} &=
+    \prod_{\substack{\{ a, b \} \in E}} H_1 H_2 H_3 \ket{000} =
+    CZ_{1, 2} CZ_{2, 3} \ket{+++} \\
+    &= \frac{1}{\sqrt{8}} 
+    (\ket{000} + \ket{001} + \ket{010} - \ket{011} 
+    + \ket{100} + \ket{101} - \ket{110} + \ket{111}) . \notag
+\end{align}
+
+It is easy to check that this state is indeed stabilized by the stabilizers $S_1$, $S_2$ and $S_3$ in \cref{eq:stabilizers}.
+The equivalence of these definitions is demonstrated in the work \cite{graph_state}, providing a proof of their interchangeability.

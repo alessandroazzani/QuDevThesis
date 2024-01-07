@@ -23,6 +23,7 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{tikz}
+\usepackage{quantikz}
 \usepackage{physics}
 \usepackage{tikz-cd}
 \usepackage{titlesec}
@@ -45,7 +46,7 @@
 \usepackage[
 backend=bibtex,
 style=numeric,
-sorting=anyt
+sorting=none
 ]{biblatex}
 \DeclareDelimFormat[bib]{multinamedelim}{\addcomma\space}
 \DeclareDelimAlias[bib]{finalnamedelim}{multinamedelim}
@@ -55,10 +56,12 @@ nomarginpar,
 headheight=3cm,
 ]{geometry}
 
-% Allow for an extra line break for no warnings in Bibliography ---------------
-
+% Allow for an extra line break for no warnings in Bibliography --------------
 \emergencystretch=1em
 
+% Cation format
+\DeclareCaptionFormat{boldlabel}{\textbf{#1#2}#3\par}
+\captionsetup[figure]{format=boldlabel}
 
 % Set toc style and font ------------------------------
 \renewcommand\cftchapfont{\normalsize\bfseries}
