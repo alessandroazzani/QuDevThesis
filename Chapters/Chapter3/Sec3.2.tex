@@ -56,11 +56,11 @@ If our goal is to obtain the state depicted in \cref{fig:CZ_graph} as an outcome
       \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \qw
     \end{quantikz}
 \end{equation}
-Fortunately, replacing the Hadamard gates with rotations around the $y$ axis for both qubits accomplishes this task:
+Fortunately, replacing the Hadamard gates with $\pi/2$ rotations around the $y$ axis for both qubits accomplishes this task:
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}} & \ctrl{1} & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{Y_{\pi / 2}} & \control{} & \qw
+      \lstick{$\ket{0}_1$} & \gate{Y_+} & \ctrl{1} & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_+} & \control{} & \qw
     \end{quantikz}
 \end{equation}
 
@@ -71,6 +71,18 @@ Fortunately, replacing the Hadamard gates with rotations around the $y$ axis for
     \caption{2-qubits linear graph}
     \label{fig:CZ_graph}
 \end{figure}
+
+From now on, we will use the following notation:
+\begin{equation*}
+    \begin{quantikz}
+        \qw & \gate{Y_+} & \qw
+    \end{quantikz}
+    : R_y(+\pi/2) \, , \quad
+    \begin{quantikz}
+        \qw & \gate{Y_-} & \qw
+    \end{quantikz}
+    : R_y(-\pi/2)
+\end{equation*}
 
 \subsection{SWAP}
 
@@ -102,8 +114,8 @@ This means we're unable to perform single-qubit gates on it due to its rapid sta
 We can execute the SPAW gate of \cref{fig:SWAP_graph} and generate an analogue final state by running the following protocol
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}} & \ctrl{1}   & \qw      & \qw                & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{Y_{\pi / 2}} & \control{} & \swap{1} & \gate{Y_{\pi / 2}} & \qw \\
+      \lstick{$\ket{0}_1$} & \gate{Y_+} & \ctrl{1}   & \qw      & \qw                & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_+} & \control{} & \swap{1} & \gate{Y_+} & \qw \\
       \lstick{$\ket{0}_3$} & \qw                & \qw        & \targX{} & \qw                & \qw
     \end{quantikz}
 \end{equation}
@@ -144,8 +156,8 @@ We will maintain the assumption that qubit 3 serves as an emitter qubit, as prev
 The executable sequence of gates on our device is the following:
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{Y_{\pi / 2}}  & \ctrl{1}   & \qw         & \qw                 & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{Y_{-\pi / 2}} & \control{} & \ctrl{1}    & \gate{Y_{\pi / 2}} & \qw \\
+      \lstick{$\ket{0}_1$} & \gate{Y_+}  & \ctrl{1}   & \qw         & \qw                 & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_-} & \control{} & \ctrl{1}    & \gate{Y_+} & \qw \\
       \lstick{$\ket{0}_3$} & \qw                 & \qw        & \targ{}     & \qw                 & \qw
     \end{quantikz}
 \end{equation}

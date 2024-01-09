@@ -1,0 +1,86 @@
+\section{(2, 2) Tree Graph State}
+\label{sec:2_2_tree}
+
+\begin{figure}
+    \centering
+    \include{Figures/Chap4/2_2_graph}
+    \vspace{-1cm}
+    \caption{Representation of $(2, 2)$ tree graph state}
+    \label{fig:2_2_graph}
+\end{figure}
+
+The term \emph{$(n, m)$ tree graph state} refers to a tree structure where the initial qubit, known as the root qubit, links to $n$ other qubits, each of which is connected to $m$ additional qubits.
+Specifically, we'll focus on examining a $(2, 2)$ tree graph state, visually represented in \cref{fig:2_2_graph}.
+
+The tree graph state holds importance in quantum repeater protocols as it allows encoding a qubit at the root node.
+This enables qubit transmission even if some photons are lost.
+This resilience, requiring only a subset of essential photons for loss correction \cite{Why_tree_graph_state}, ensures reliable communication despite potential losses.
+
+Hence, it is crucial to create the tree graph state while ensuring the root remains associated with one of our qubits.
+This is necessary as we need the root qubit accessible for Bell state measurements, enabling us to encode the intended state for transmission.
+
+We will begin by outlining the protocol employed to create the initial branch of the $(2, 2)$ tree graph state.
+Initially, we generate the root qubit for the tree state using a straightforward $\pi/2$ $y$ rotation.
+In the circuit diagram, the first quantum wire signifies the root qubit, representing a physical qubit in our device. The subsequent quantum wire represents the second physical qubit, while the remaining wires symbolize flying photons.
+\begin{equation}
+\label{eq:1_branch_implementation}
+    \begin{quantikz}
+      \lstick{$S_1 \rightarrow \ket{0}_1$} & \gate{Y_+}\slice[style=black]{\textbf{(a)}}  & \qw      & \qw                  & \ctrl{1}   & \qw   & \qw      & \qw                 & \qw \\
+      \lstick{$S_2 \rightarrow \ket{0}_2$} & \gate{Y_+} & \ctrl{2} & \gate{Y_-}\slice[style=black]{\textbf{(b)}}  & \control{}\slice[style=black]{\textbf{(c)}} & \qw   & \ctrl{1} & \gate{Y_+}\slice[style=black]{\textbf{(d)}} & \qw \\
+      \lstick{$\ket{0}_3$} & \qw                 & \qw      & \qw                  & \qw        & \qw   & \targ{}  & \qw                 & \qw \\
+      \lstick{$\ket{0}_4$} & \qw                 & \targ{}  & \qw                  & \qw        & \qw   & \qw      & \qw                 & \qw 
+    \end{quantikz}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \include{Figures/Chap4/1_branch_tree}
+    \vspace{-1cm}
+    \caption{Visual implementation of first branch of the $(2, 2)$ tree graph state}
+    \label{fig:1_branch_tree}
+\end{figure}
+
+Fig.~\ref{fig:1_branch_tree} illustrates the visual progression occurring within the device.
+
+Should we emit all nodes except for the root, we can replicate the process to generate the second and final branch of the intended quantum state.
+The circuit illustrating the entire implementation of the tree graph state is presented below. 
+Notably, the initial two quantum wires maintain their role as the first and second storage qubits.
+Meanwhile, the remaining six wires signify the six additional vertices in the state, functioning as flying qubits in our configuration.
+\begin{equation}
+\label{eq:tree_implementation}
+    \begin{quantikz}[column sep=0.4cm]
+      \lstick{$\ket{0}_1$} & \gate{Y_+} & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_2$} & \gate{Y_+} & \ctrl{3} & \gate{Y_-} & \control{} & \ctrl{2} & \gate{Y_+} & \swap{1} & \gate{Y_+} & \ctrl{5} & \gate{Y_-} & \control{} & \ctrl{4} & \gate{Y_+} & \qw \\
+      \lstick{$\ket{0}_3$} & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_4$} & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_5$} & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_6$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw \\
+      \lstick{$\ket{0}_7$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw
+    \end{quantikz}
+    \notag
+\end{equation}
+
+The state generated with the previous circuit is equivalent to the following graph state.
+
+\begin{equation}
+\label{eq:tree_graph_state}
+    \begin{quantikz}
+        \lstick{$\ket{0}_1$} & \gate{H}  & \ctrl{3}  & \qw  & \qw  & \ctrl{5}  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_2$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \qw  & \ctrl{4}  & \qw \\
+        \lstick{$\ket{0}_3$} & \gate{H}  & \qw  & \qw  & \ctrl{1}  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_4$} & \gate{H}  & \control{}  & \ctrl{1}  & \control{}  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_5$} & \gate{H}  & \qw  & \control{}  & \qw  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_6$} & \gate{H}  & \qw  & \qw  & \qw  & \control{}  & \ctrl{1}  & \control{}  & \qw \\
+        \lstick{$\ket{0}_7$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \control{}  & \qw  & \qw
+    \end{quantikz}
+\end{equation}
+
+Fig.~\ref{fig:final_tree_implementation} shows the final state we would get if we were to implement \cref{eq:tree_implementation} on our device, labelling the vertices according to the numbering in the equation.
+
+\begin{figure}
+    \centering
+    \include{Figures/Chap4/Final_tree_implementation}
+    \vspace{-1cm}
+    \caption{Outcome state after implementing \cref{eq:tree_implementation}}
+    \label{fig:final_tree_implementation}
+\end{figure}
