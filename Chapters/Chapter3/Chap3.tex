@@ -1,12 +1,16 @@
 \chapter{Graph States}
 \label{Chap:graph_states}
+\thispagestyle{fancy}
 
-\emph{Graph states} \cite{graph_state, rohde-graph-states} own their name to the several constituents associated with graphs.
+In quantum computing, a \emph{graph state} \cite{graph_state, rohde-graph-states} is a specific kind of multi-qubit state that can be depicted using a graph.
 It can be understood as a summary of the interactions between particles, represented by the nodes.
-At the same time, the adjacency matrix encodes the stabilizers of the state, which is a complete set of eigenvalue equation satisfied by the state. 
+At the same time, the adjacency matrix encodes the stabilizers of the state, which is a complete set of eigenvalue equations satisfied by the state. 
 
-They are incredibly useful as they enable \emph{Measurement Based Quantum Computing} (MBQC) \cite{MBQC}.
-In MBQC, computation proceeds only by measuring qubits from a graph state of some topology, which is usually a lattice, where the order and basis in which qubits are measured dictates the implemented computation.
+They are incredibly useful as they enable \emph{Measurement-Based Quantum Computing} (MBQC) \cite{MBQC}.
+In MBQC, algorithms can be converted from gate sequences into a series of measurements and their respective bases. This allows for the execution of quantum algorithms through sequential measurement operations, providing an alternative implementation approach.
+
+Graph states serve as foundational structures preceding \emph{cluster states} in quantum computing \cite{cluster_state}.
+Cluster states, which are closely related to graph states, are essential for enabling universal quantum computation, as they provide the basis for \emph{Universal MBQC}.
 
 \input{Chapters/Chapter3/Sec3.1}
 \input{Chapters/Chapter3/Sec3.2}

@@ -1,25 +1,127 @@
-\section{Dispersive Readout}
-\label{sec:readout}
+\section{Waveguides}
+\label{sec_waveguides}
 
-The readout mechanism allows us to measure the state of the qubit in a non-demolishing way \cite{singleshot_readout}.
-In our experiments this is needed in order to characterize the device and for calibration purposes.
+To regulate and execute operations on the qubits, we utilize waveguides.
+These waveguides are typically capacitively linked to the qubit, facilitating the implementation of single- and two-qubit operations, flux tuning, and readout procedures.
 
-The transmon our capacitively coupled to a readout resonator, which is a waveguide on our device.
-By sending through this waveguide a signal far detuned from the qubit's frequency, its frequency will slightly change depending on the state of the qubit, without interfering with the state of the latter.
-This process ids described by the James-Cummins Hamiltonian
-\begin{equation}
-    \hat{H} = \hbar \omega_r \hat{a}^\dagger \hat{a} + \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}^z + \hbar g (\hat{a}^\dagger \hat{\sigma}^- + \hat{a} \hat{\sigma}^+) ,
-\end{equation}
-which models the coupling between a 2-level system and a light mode in a cavity.
-Thus, by measuring the frequency shift of the readout resonator, we are able to infer the qubit's state.
+\subsection{Flux line}
 
-In order to not let the qubit couple too strongly to the environment through the readout resonator, a Purcell filter is applied between the resonator and the qubit (see \cref{fig:diagram_storage_qubit}).
-This allows to keep the lifetimes of the qubits longer, by suppressing spontaneous emission due to the Purcell effect \cite{Purcell_effect}.
+The primary waveguide, denoted as the \emph{flux line}, it is not capacitively coupled to the qubit.
+Its role lies in altering the magnetic field entering the SQUID loop to adjust its frequency.
+This adjustment is achieved by modulating the current within the flux line, thereby generating the magnetic field within the SQUID loop (see \cref{fig:diagram_storage_qubit}).
 
 \begin{figure}
     \centering
     \include{Figures/Chap1/Readout_diagram}
     \vspace{-1cm}
-    \caption{Diagram representing a storage qubit and their readout mechanism}
+    \caption{Diagram representing a qubit together with flux line, charge line and readout mechanism}
     \label{fig:diagram_storage_qubit}
 \end{figure}
+
+%\begin{figure}
+%    \centering
+%    \begin{subfigure}{0.55\textwidth}
+%        \centering
+%        \include{Figures/Chap1/Readout_diagram}
+%        \vspace{-1cm}
+%        \caption{Diagram representing a qubit together with flux line, charge line and readout mechanism}
+%        \label{fig:diagram_storage_qubit}
+%    \end{subfigure}
+%    \hspace{0.3cm}
+%    \begin{subfigure}{0.35\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth]{Images/Chap1/Readout_pic.png} 
+%        \caption{Micrograph}
+%        \label{fig:diagram_storage_qubit_real}
+%    \end{subfigure}
+%    \caption{A qubit together with flux line, charge line and readout mechanism}
+%    \label{fig:diagram_storage_qubit_tot}
+%\end{figure}
+
+\subsection{Charge line}
+
+The \emph{charge line} serves to execute single-qubit gates on the transmon qubit.
+It is capacitively linked to the central island of the qubit.
+A coherent drive of time-dependent amplitude $\varepsilon(t)$, frequency $\omega_d$ and phase $\phi_d$ is modeled by the Hamiltonian \cite{LC_resonator}
+\begin{equation}
+    \hat{H} = \frac{\hbar \delta}{2} \hat{\sigma}_z + 
+    \hbar \varepsilon(t) \left( \cos(\phi_d) \hat{\sigma}_x + \sin(\phi_d) \hat{\sigma}_y \right) ,
+\end{equation}
+where the Hamiltonian is expressed within a frame rotating at $\omega_d$, and $\delta$ represents the detuning between the qubit and the drive. 
+This illustrates how the phase $\phi_d$ of the drive enables the selection of rotations around either the $x$ or $y$ axis. 
+For example, when $\delta = 0$, setting $\phi_d = 0$ executes a rotation around the $x$ axis, while $\phi = \pi/2$ corresponds to a rotation around the $y$ axis. 
+Given that any rotation on the Bloch sphere can be decomposed into rotations around two axes, we can implement any single-qubit gate by sequencing the appropriate gates with the corresponding phases.
+
+\subsection{Readout resonator}
+
+The readout mechanism comprises two primary components: the \emph{readout resonator} and the \emph{Purcell filter}. 
+Its objective is to measure the state of the qubit in a non-destructive manner \cite{singleshot_readout}.
+
+The starting point is the famous Jaynes-Cummings Hamiltonian \cite{haroche2006exploring}
+\begin{equation}
+    \hat{H} = \hbar \omega_r \hat{a}^\dagger \hat{a} + \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}_z + \hbar g (\hat{a}^\dagger \hat{\sigma}^- + \hat{a} \hat{\sigma}^+) ,
+\end{equation}
+which models the interaction between a two-level system with transition frequency $\omega_{ge}$ and an electromagnetic field mode at frequency $\omega_r$.
+In the dispersive regime ($|\omega_r - \omega_{ge} \gg g|$), the Hamiltonian reduces to \cite{transmon_regime}
+\begin{align}
+    \hat{H} &= \hbar \omega_r \hat{a}^\dagger \hat{a} + \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}_z + \hbar \chi \hat{\sigma}_z \hat{a}^\dagger \hat{a} \\
+    &= \hbar (\omega_r + \chi \hat{\sigma}_z ) \hat{a}^\dagger \hat{a} +
+    \frac{1}{2} \hbar \omega_{ge} \hat{\sigma}_z 
+\end{align}
+where $\chi$ is the qubit-state dependent cavity-shift.
+
+Thus, the resonator's frequency becomes qubit-state's dependent.
+If, for instance, the qubit is in the $\ket{g}$ state, then the resonator's frequency will become $\omega_r - \chi$.
+On the other hand, if the qubit is in the $\ket{e}$ state, then the resonator's frequency will be $\omega_r + \chi$.
+The frequency of the resonator can be determined by assessing the transmission of an input signal through the feedline (see \cref{fig:diagram_storage_qubit}).
+This transmission decreases when the signal is on resonance with the resonator's frequency.
+
+In case where the qubit is in a mixed state like
+\begin{equation}
+    c_g \ket{g} + c_e \ket{e} ,
+\end{equation}
+then driving the resonator would results in an entangled state between the coherent signal and the qubit
+\begin{equation}
+    c_g \ket{g, \alpha_g} + c_e \ket{e, \alpha_e} .
+\end{equation}
+Thus, measuring either $\alpha_g$ or $\alpha_e$ will collapse the state of the qubit onto $\ket{g}$ or $\ket{e}$, respectively.
+The principle underlying quantum non-demolition (QND) measurement is predicated on the stability of the state post-measurement.
+This implies that subsequent QND measurements would yield identical results, as the state remains unchanged.
+
+To prevent excessive coupling between the qubit and its environment via the readout resonator, a Purcell filter is interposed between them.
+This configuration helps extend the qubit lifetimes by mitigating spontaneous emission resulting from the Purcell effect \cite{Purcell_effect}.
+
+\subsection{Tunable couplers}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \include{Figures/Chap1/tunable_coupler}
+        \vspace{-1cm}
+        \caption{Diagram}
+        \label{fig:tun_coupl}
+    \end{subfigure}
+    \hspace{0.3cm}
+    \begin{subfigure}{0.25\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Chap1/tun_couplers.png} 
+        \caption{Micrograph}
+        \label{fig:tun_coupl_real}
+    \end{subfigure}
+    \caption{Two qubits connected by tunable couplers}
+    \label{fig:tun_coupl_tot}
+\end{figure}
+
+We employ \emph{tunable couplers} \cite{tun_coupler} to control interactions between pairs of qubits.
+They allow us to mediate interaction between the qubits and perform two-qubits gates.
+They are composed of two coplanar waveguides (see \cref{fig:tun_coupl}).
+One of them is a normal waveguide, and thus has a fixed coupling term $J_\text{fixed}$.
+The other has a SQUID loop and is flux tunable.
+Its coupling term $J_\text{tunable}(\phi)$ can be tuned with the magnetic flux generated by a flux line and going into a SQUID loop placed on the waveguide
+
+The SQUID loop connected to the coupler allows us to control the interaction between the two qubits. 
+To minimise the interaction between the two qubits and the ZZ crosstalk, the DC flux driving the SQUID loop has to be calibrated to the operation point.
+
+To implement a two-qubit gate, a sinusoidal pulse is sent on top of the DC flux to the SQUID loop. If the modulation frequency of this pulse matches a transition of the two-qubit system, it will perform a two-qubit gate.
+In this way we are able to turn on interactions between specific levels of the qubits (see \cref{chap:2_qubit_gates}).

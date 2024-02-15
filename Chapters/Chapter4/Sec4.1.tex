@@ -1,4 +1,4 @@
-\section{(2, 2) Tree Graph State}
+\subsection{(2, 2) Tree Graph State}
 \label{sec:2_2_tree}
 
 \begin{figure}
@@ -12,12 +12,12 @@
 The term \emph{$(n, m)$ tree graph state} refers to a tree structure where the initial qubit, known as the root qubit, links to $n$ other qubits, each of which is connected to $m$ additional qubits.
 Specifically, we'll focus on examining a $(2, 2)$ tree graph state, visually represented in \cref{fig:2_2_graph}.
 
-The tree graph state holds importance in quantum repeater protocols as it allows encoding a qubit at the root node.
+The tree graph state holds importance in one-way quantum repeater protocols as it allows encoding a qubit at the root node.
 This enables qubit transmission even if some photons are lost.
 This resilience, requiring only a subset of essential photons for loss correction \cite{Why_tree_graph_state}, ensures reliable communication despite potential losses.
 
-Hence, it is crucial to create the tree graph state while ensuring the root remains associated with one of our qubits.
-This is necessary as we need the root qubit accessible for Bell state measurements, enabling us to encode the intended state for transmission.
+Hence, it is crucial to create the tree graph state while ensuring the root remains stored within one of our qubits.
+This is necessary as we need the root qubit to be accessible for Bell state measurements, enabling us to encode the intended state for transmission.
 
 We will begin by outlining the protocol employed to create the initial branch of the $(2, 2)$ tree graph state.
 Initially, we generate the root qubit for the tree state using a straightforward $\pi/2$ $y$ rotation.
@@ -25,14 +25,15 @@ In the circuit diagram, the first quantum wire signifies the root qubit, represe
 \begin{equation}
 \label{eq:1_branch_implementation}
     \begin{quantikz}
-      \lstick{$S_1 \rightarrow \ket{0}_1$} & \gate{Y_+}\slice[style=black]{\textbf{(a)}}  & \qw      & \qw                  & \ctrl{1}   & \qw   & \qw      & \qw                 & \qw \\
-      \lstick{$S_2 \rightarrow \ket{0}_2$} & \gate{Y_+} & \ctrl{2} & \gate{Y_-}\slice[style=black]{\textbf{(b)}}  & \control{}\slice[style=black]{\textbf{(c)}} & \qw   & \ctrl{1} & \gate{Y_+}\slice[style=black]{\textbf{(d)}} & \qw \\
-      \lstick{$\ket{0}_3$} & \qw                 & \qw      & \qw                  & \qw        & \qw   & \targ{}  & \qw                 & \qw \\
-      \lstick{$\ket{0}_4$} & \qw                 & \targ{}  & \qw                  & \qw        & \qw   & \qw      & \qw                 & \qw 
+      \lstick{$\ket{0}_{S1}$} & \gate{Y_+}\slice[style=black]{\textbf{(a)}}  & \qw      & \qw  & \qw & \ctrl{1}  & \qw & \qw   & \qw      & \qw & \qw &  \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{Y_+} & \ctrl{1} & \gate{Y_-} \slice[style=black]{\textbf{(b)}} &  \qw   & \control{}  & \qw \slice[style=black]{\textbf{(c)}} & \qw   & \ctrl{2} & \gate{Y_+}\slice[style=black]{\textbf{(d)}} & \qw & \swap{3} & \qw \slice[style=black]{\textbf{(e)}} & \qw \\
+      \lstick{$\ket{0}_{P1}$} & \qw                 & \targ{}      & \qw           & \qw       & \qw     & \qw   & \qw   & \qw  & \qw                 & \qw & \qw & \qw & \qw\\
+      \lstick{$\ket{0}_{P2}$} & \qw                 & \qw          & \qw           & \qw       & \qw     & \qw   & \qw   & \targ{}      & \qw                 & \qw & \qw & \qw & \qw  \\
+      \lstick{$\ket{0}_{P3}$} & \qw                 & \qw      & \qw          & \qw        & \qw      & \qw  & \qw   & \qw      & \qw                 & \qw & \targX{} & \qw & \qw
     \end{quantikz}
 \end{equation}
 
-\begin{figure}
+\begin{figure}[b]
     \centering
     \include{Figures/Chap4/1_branch_tree}
     \vspace{-1cm}
@@ -49,15 +50,15 @@ Meanwhile, the remaining six wires signify the six additional vertices in the st
 \begin{equation}
 \label{eq:tree_implementation}
     \begin{quantikz}[column sep=0.4cm]
-      \lstick{$\ket{0}_1$} & \gate{Y_+} & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{Y_+} & \ctrl{3} & \gate{Y_-} & \control{} & \ctrl{2} & \gate{Y_+} & \swap{1} & \gate{Y_+} & \ctrl{5} & \gate{Y_-} & \control{} & \ctrl{4} & \gate{Y_+} & \qw \\
-      \lstick{$\ket{0}_3$} & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-      \lstick{$\ket{0}_4$} & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-      \lstick{$\ket{0}_5$} & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-      \lstick{$\ket{0}_6$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw \\
-      \lstick{$\ket{0}_7$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw
+      \lstick{$\ket{0}_{S1}$} & \gate{Y_+} & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{Y_+} & \ctrl{1} & \gate{Y_-} & \control{} & \ctrl{2} & \gate{Y_+} & \swap{3} & \gate{Y_+} & \ctrl{4} & \gate{Y_-} & \control{} & \ctrl{5} & \gate{Y_+} & \swap{6} & \qw \\
+      \lstick{$\ket{0}_{P1}$} & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{P2}$} & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{P3}$} & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{P4}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{P5}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw \\
+      \lstick{$\ket{0}_{P6}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw
     \end{quantikz}
-    \notag
 \end{equation}
 
 The state generated with the previous circuit is equivalent to the following graph state.
@@ -65,22 +66,40 @@ The state generated with the previous circuit is equivalent to the following gra
 \begin{equation}
 \label{eq:tree_graph_state}
     \begin{quantikz}
-        \lstick{$\ket{0}_1$} & \gate{H}  & \ctrl{3}  & \qw  & \qw  & \ctrl{5}  & \qw  & \qw  & \qw \\
-        \lstick{$\ket{0}_2$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \qw  & \ctrl{4}  & \qw \\
-        \lstick{$\ket{0}_3$} & \gate{H}  & \qw  & \qw  & \ctrl{1}  & \qw  & \qw  & \qw  & \qw \\
-        \lstick{$\ket{0}_4$} & \gate{H}  & \control{}  & \ctrl{1}  & \control{}  & \qw  & \qw  & \qw  & \qw \\
-        \lstick{$\ket{0}_5$} & \gate{H}  & \qw  & \control{}  & \qw  & \qw  & \qw  & \qw  & \qw \\
-        \lstick{$\ket{0}_6$} & \gate{H}  & \qw  & \qw  & \qw  & \control{}  & \ctrl{1}  & \control{}  & \qw \\
-        \lstick{$\ket{0}_7$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \control{}  & \qw  & \qw
+        \lstick{$\ket{0}_{S1}$} & \gate{H}  & \ctrl{2}  & \qw  & \qw  & \ctrl{5}  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_{P1}$} & \gate{H}  & \qw  & \qw  & \ctrl{1}  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_{P2}$} & \gate{H}  & \control{}  & \ctrl{1}  & \control{}  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_{P3}$} & \gate{H}  & \qw  & \control{}  & \qw  & \qw  & \qw  & \qw  & \qw \\
+        \lstick{$\ket{0}_{P4}$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \qw  & \ctrl{1}  & \qw \\
+        \lstick{$\ket{0}_{P5}$} & \gate{H}  & \qw  & \qw  & \qw  & \control{}  & \ctrl{1}  & \control{}  & \qw \\
+        \lstick{$\ket{0}_{P6}$} & \gate{H}  & \qw  & \qw  & \qw  & \qw  & \control{}  & \qw  & \qw
     \end{quantikz}
 \end{equation}
 
 Fig.~\ref{fig:final_tree_implementation} shows the final state we would get if we were to implement \cref{eq:tree_implementation} on our device, labelling the vertices according to the numbering in the equation.
 
+% \begin{figure}
+%     \centering
+%     \include{Figures/Chap4/Final_tree_implementation}
+%     \vspace{-1cm}
+%     \caption{Outcome state after implementing % \cref{eq:tree_implementation}}
+%     \label{fig:final_tree_implementation}
+% \end{figure}
+
 \begin{figure}
-    \centering
-    \include{Figures/Chap4/Final_tree_implementation}
-    \vspace{-1cm}
-    \caption{Outcome state after implementing \cref{eq:tree_implementation}}
-    \label{fig:final_tree_implementation}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \include{Figures/Chap4/Final_tree_implementation}
+        \vspace{-1cm}
+        \caption{Outcome state after implementing \cref{eq:tree_implementation}}
+        \label{fig:final_tree_implementation}
+    \end{minipage}
+    \hspace{1cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \include{Figures/Chap4/3_3_tree}
+        \vspace{-1cm}
+        \caption{$(3, 2)$ tree graph state}
+        \label{fig:3_3_tree}
+    \end{minipage}
 \end{figure}

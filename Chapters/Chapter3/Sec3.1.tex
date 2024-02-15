@@ -1,11 +1,11 @@
 \section{Definitions}
 \label{Sec:graph_definition}
 
-Graph states can be defined in two ways: through \emph{stabilizer formalism} or using \emph{quantum circuit}.
+Graph states can be defined in two ways: through \emph{the stabilizer formalism} or using \emph{quantum circuits}.
 
 \subsection{Stabilizer Formalism Definition}
 
-A stabiliser is an operator under which the stabilised state is invariant, and the state is uniquely specified as the simultaneous $+1$ eigenstate of all $N$ stabilisers,
+A stabilizer is an operator under which the stabilised state is invariant, and the state is uniquely specified as the simultaneous $+1$ eigenstate of all $N$ stabilisers,
 \begin{equation}
     S_i \ket{\psi} = \ket{\psi} \quad \forall i \in \{1, \ldots, N\} .
 \end{equation}
@@ -18,7 +18,7 @@ for each node $i$ of the graph, where $\mathcal{N}(i)$ denotes the neighbourhood
 
 \begin{figure}
     \centering
-    \include{Figures/Simple_graph}
+    \include{Figures/Chap3/Simple_graph}
     \vspace{-1cm}
     \caption{A $3$-qubits linear graph state}
     \label{fig:simple_3_graph}
@@ -56,7 +56,7 @@ where $CZ_{a, b}$ is the controlled-phase operator between the vertices $a$ and 
 For instance, the state in \cref{fig:simple_3_graph} is
 \begin{align}
     \ket{G} &=
-    \prod_{\substack{\{ a, b \} \in E}} H_1 H_2 H_3 \ket{000} =
+    \prod_{\substack{\{ a, b \} \in E}} CZ_{a,b} \, H_1 H_2 H_3 \ket{000} =
     CZ_{1, 2} CZ_{2, 3} \ket{+++} \\
     &= \frac{1}{\sqrt{8}} 
     (\ket{000} + \ket{001} + \ket{010} - \ket{011} 

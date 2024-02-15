@@ -1,34 +1,35 @@
-\section{(n, 2) Tree Graph State}
+\subsection{(n, 2) Tree Graph State}
 \label{sec:n_2_tree}
+
+% \begin{wrapfigure}{R}{0.40\textwidth}
+%     \centering
+%     \include{Figures/Chap4/3_3_tree}
+%     \vspace{-1cm}
+%     \caption{$(3, 2)$ tree graph state}
+%     \label{fig:3_3_tree}
+% \end{wrapfigure}
 
 Beginning from the final state derived from \cref{eq:tree_implementation}, by replicating the process outlined in \cref{eq:1_branch_implementation} to generate another branch, we could extend the implementation to create a generalized $(2, 2)$ tree graph state, thereby enabling the implementation of a $(n, 2)$ tree state.
 
-As an example let us consider a $(3, 2)$ tree state (figure 1).
+As an example let us consider a $(3, 2)$ tree state (see \cref{fig:3_3_tree}).
 It can be implemented using the following sequence of gates.
+In the first gate, the instruction is simply to execute the same operations as those described in \cref{eq:tree_implementation}.
+
 \begin{equation}
-    \begin{quantikz}[column sep=0.2cm]
-      & \gate{Y_+} & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw  \\
-      & \gate{Y_+} & \ctrl{3} & \gate{Y_-} & \control{} & \ctrl{2} & \gate{Y_+} & \swap{1} & \gate{Y_+} & \ctrl{6} & \gate{Y_-} & \control{} & \ctrl{5} & \gate{Y_+} & \swap{4} & \gate{Y_+} & \ctrl{8} & \gate{Y_-} & \control{} & \ctrl{7} & \gate{Y_+} & \qw  \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  \\
-      & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  \\
-      & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw  \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw  \\
-      & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw 
+    \begin{quantikz}[transparent]
+        \lstick{$\ket{0}_{S1}$} & \gate[8]{\text{\cref{eq:tree_implementation}}} & \qw & \qw & \qw & \ctrl{1} & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{S2}$} & \qw & \gate{Y_+} & \ctrl{7} & \gate{Y_-} & \control{} & \ctrl{8} & \gate{Y_+} & \swap{9} & \qw \\
+        \lstick{$\ket{0}_{P1}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P2}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P3}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P4}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P5}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P6}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P7}$} & \qw & \qw & \targ{} & \qw & \qw & \qw & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P8}$} & \qw & \qw & \qw & \qw & \qw & \targ{} & \qw & \qw & \qw \\
+        \lstick{$\ket{0}_{P9}$} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \targX{} & \qw        
     \end{quantikz}
-    \notag
 \end{equation}
 
-Although the initial state of all qubits in the protocol remains $\ket{0}$, for the sake of fitting the circuit within the page, we imply their initialization.
 
-%\begin{figure}
-%    \centering
-%    \include{Figures/Chap4/3_3_tree}
-%    \vspace{-1cm}
-%    \caption{$(3, 2)$ tree graph state}
-%    \label{fig:3_3_tree}
-%\end{figure}
-%
 %\section{(n, 3) Tree Graph State}

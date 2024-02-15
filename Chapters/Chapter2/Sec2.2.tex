@@ -2,7 +2,7 @@
 \section{Storage-Storage}
 \label{sec:S-S}
 
-In the S-S system, the extended lifetime of the two qubits allows us to execute single-qubit gates on them.
+In the Storage-Storage system (S-S), the extended lifetime of the two qubits allows us to execute single-qubit gates on them.
 Additionally, the capability to perform $2\pi$ rotations on the sidebands of this two-qubit system enables the implementation of a CZ gate within the S-S system.
 
 \begin{figure}
@@ -35,10 +35,7 @@ It performs the operation
 \end{equation}
 
 The operational sequence on our device involves transferring population between the states $\ket{ee}$ and $\ket{fg}$ within the S-S system.
-After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but with an opposite phase.
-
-This gate isn't feasible within the S-E system as it necessitates a full $2\pi$ rotation, which isn't reliably achievable.
-Moreover, it doesn't make sense as we can't distinguish between a CZ gate and an identity gate, given our inability to sustain the $\ket{e1}$ state.
+After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but with an opposite phase (see \cref{fig:SS_CZ}), effectively implementing a CZ gate.
 
 \begin{figure}
     \centering
@@ -47,3 +44,16 @@ Moreover, it doesn't make sense as we can't distinguish between a CZ gate and an
     \caption{Protocol for S-S CZ gate}
     \label{fig:SS_CZ}
 \end{figure}
+
+In this context, it is necessary to calibrate the interaction between the $ee$ and $fg$ energy levels.
+For this purpose, we employ the previously derived model, using \cref{eq:chevron} to perform fitting on the data.
+Figure ?? shows the data and the respective fit.
+It also shows the operational point for implementing the CZ gate.
+This operational point is given by
+\begin{equation}
+    \widetilde{t} = \frac{1}{2 g_0}.
+\end{equation}
+On Figure ?? is also depicted the first oscillation period as a function of the detuning $\delta$, given by
+\begin{equation}
+    t = \frac{1}{\sqrt{4 g_0^2 + \delta^2}} . 
+\end{equation}
