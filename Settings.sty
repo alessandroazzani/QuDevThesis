@@ -79,7 +79,7 @@ headheight=3cm,
   \begin{minipage}{\textwidth}
     \centering
     \begin{tikzpicture} % Rememmber to put 2000 samples at the end, nto now bc it's slowing doen a lot
-      \draw[black, domain=-6.9:6.9, samples=10] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
+      \draw[black, domain=-6.9:6.9, samples=2] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
     \end{tikzpicture}
     \vspace{-0.6cm}
   \end{minipage}\par}%
@@ -104,3 +104,5 @@ headheight=3cm,
 \newcommand{\g}{\ensuremath{\ket{g}}}
 \newcommand{\e}{$\ket{e}$}
 \newcommand{\f}{$\ket{f}$}
+\newcommand{\ac}{\delta_{\text{AC}}}
+\newcommand{\xtalk}{\mathsf{X}_{\text{talk}}}

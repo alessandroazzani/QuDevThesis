@@ -5,7 +5,7 @@
 In the Storage-Storage system (S-S), the extended lifetime of the two qubits allows us to execute single-qubit gates on them.
 Additionally, the capability to perform $2\pi$ rotations on the sidebands of this two-qubit system enables the implementation of a CZ gate within the S-S system.
 
-\begin{figure}
+\begin{figure}[b]
     \centering
     \include{Figures/Chap2/SS_levels}
     \vspace{-1cm}
@@ -47,13 +47,21 @@ After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but wit
 
 In this context, it is necessary to calibrate the interaction between the $ee$ and $fg$ energy levels.
 For this purpose, we employ the previously derived model, using \cref{eq:chevron} to perform fitting on the data.
-Figure ?? shows the data and the respective fit.
+Fig.~\ref{fig:Chev_data} shows the data and the respective fit.
 It also shows the operational point for implementing the CZ gate.
 This operational point is given by
 \begin{equation}
     \widetilde{t} = \frac{1}{2 g_0}.
 \end{equation}
-On Figure ?? is also depicted the first oscillation period as a function of the detuning $\delta$, given by
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Images//Chap3/Chevron_data.pdf}
+    \caption{Data of the $eefg$ sideband transition between the two storage qubits}
+    \label{fig:Chev_data}
+\end{figure}
+
+On \cref{fig:Chev_data} is also depicted the first oscillation period as a function of the detuning $\delta$, given by
 \begin{equation}
     t = \frac{1}{\sqrt{4 g_0^2 + \delta^2}} . 
 \end{equation}

@@ -54,9 +54,16 @@ First, an arbitrary state is prepared on the storage qubit through single-qubit 
 Following this, a $\pi$ rotation is induced within the $e0$-$g1$ manifold of the two-qubit system.
 Lastly, upon decay of the emitter qubit, a photon is emitted in the emission line, preserving the state initially encoded by the storage qubit.
 
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{Images/Chap3/SWAP_data.pdf}
+    \caption{Data taken to calibrate the $e0g1$ Chevron}
+    \label{fig:SWAP_chevrons}
+\end{figure}
+
 In the protocol described before, the interaction between is to qubit is switched on to execute the $\pi$ rotation between the $e0$ and the $g1$ energy levels of the two-qubit gate.
 We thus need to fine-tune this transition using \cref{eq:chevron_kappa}, obtained from the previous discussion on modelling the interaction in the presence of an external decay channel.
-Figure ?? shows the data taken to calibrate the $\pi$ rotation in the $e0$-$g1$ manifold.
+Figure~\ref{fig:SWAP_chevrons} shows the data taken to calibrate the $\pi$ rotation in the $e0$-$g1$ manifold.
 The data is then fit to the model in order to get the operational point, depicted as a dot in the figure.
 The waiting time in order to achieve the desired gate is given by
 \begin{equation}
@@ -118,4 +125,12 @@ Please note, this method effectively executes a CNOT gate within the S-E manifol
 
 Similar to the protocol involved in implementing the SWAP gate, the realization of the CNOT gate also involves a protocol segment that switches on the interaction between the two qubits. 
 We adjust this interaction in a similar way to the previous procedure, using \cref{eq:chevron_kappa}  in order to find the operational point, given by \cref{eq:tilde_t_kappa}.
-Some data taken for this purpose together with the respective fit is shown in Figure ??.
+Some data taken for this purpose together with optimal operational point is shown in \cref{fig:CNOT_data}.
+Notice that the difference with \cref{fig:SWAP_chevrons} is that now the $\ket{f}$ population is shown.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.8 \textwidth]{Images/Chap3/CNOT_data.pdf}
+    \caption{Data of the $f0e1$ sideband transition between a storage and an emitter qubit}
+    \label{fig:CNOT_data}
+\end{figure}
