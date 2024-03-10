@@ -33,6 +33,8 @@
 \usepackage{hyperref}
 \usepackage{refcount}
 \usepackage{cleveref}
+\crefformat{figure}{#2Fig.~#1#3}
+\crefmultiformat{figure}{Figs.~#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
 \usepackage{enumitem}
 \usepackage[bottom]{footmisc}
 \hypersetup{
@@ -79,7 +81,7 @@ headheight=3cm,
   \begin{minipage}{\textwidth}
     \centering
     \begin{tikzpicture} % Rememmber to put 2000 samples at the end, nto now bc it's slowing doen a lot
-      \draw[black, domain=-6.9:6.9, samples=2] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
+      \draw[black, domain=-6.9:6.9, samples=2000] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
     \end{tikzpicture}
     \vspace{-0.6cm}
   \end{minipage}\par}%

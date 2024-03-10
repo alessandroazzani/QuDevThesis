@@ -12,16 +12,14 @@
 The term \emph{$(n, m)$ tree graph state} refers to a tree structure where the initial qubit, known as the root qubit, links to $n$ other qubits, each of which is connected to $m$ additional qubits.
 Specifically, we'll focus on examining a $(2, 2)$ tree graph state, visually represented in \cref{fig:2_2_graph}.
 
-The tree graph state holds importance in one-way quantum repeater protocols as it allows encoding a qubit at the root node.
-This enables qubit transmission even if some photons are lost.
-This resilience, requiring only a subset of essential photons for loss correction \cite{Why_tree_graph_state}, ensures reliable communication despite potential losses.
-
-Hence, it is crucial to create the tree graph state while ensuring the root remains stored within one of our qubits.
-This is necessary as we need the root qubit to be accessible for Bell state measurements, enabling us to encode the intended state for transmission.
+The tree graph state holds importance in one-way quantum repeater protocols as one can encode a logical state on the entire graph by running operations between a data qubit and the root node.
+This resilience, requiring only a subset of essential photons for loss correction \cite{Why_tree_graph_state}, enables qubit transmission even if some photons are lost, ensuring reliable communication despite potential losses.
+Hence, it is crucial to create the tree graph state while ensuring the root remains stored within one of our qubits, as it is necessary for Bell state measurements, enabling the encoding of the intended state for transmission.
 
 We will begin by outlining the protocol employed to create the initial branch of the $(2, 2)$ tree graph state.
 Initially, we generate the root qubit for the tree state using a straightforward $\pi/2$ $y$ rotation.
-In the circuit diagram, the first quantum wire signifies the root qubit, representing a physical qubit in our device. The subsequent quantum wire represents the second physical qubit, while the remaining wires symbolize flying photons.
+In the circuit diagram, the first quantum wire represents the root of the tree, stored within one of the physical qubits of our device.
+The second quantum wire represents the second physical qubit, while the remaining wires symbolize flying photons.
 \begin{equation}
 \label{eq:1_branch_implementation}
     \begin{quantikz}

@@ -35,7 +35,7 @@ It performs the operation
 \end{equation}
 
 The operational sequence on our device involves transferring population between the states $\ket{ee}$ and $\ket{fg}$ within the S-S system.
-After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but with an opposite phase (see \cref{fig:SS_CZ}), effectively implementing a CZ gate.
+After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but with an acquired phase of $\pi$ (see \cref{fig:SS_CZ}), effectively implementing a CZ gate.
 
 \begin{figure}
     \centering
@@ -43,6 +43,13 @@ After a $2\pi$ rotation, the population returns to the $\ket{ee}$ state, but wit
     \vspace{-1cm}
     \caption{Protocol for S-S CZ gate}
     \label{fig:SS_CZ}
+\end{figure}
+
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=\linewidth]{Images//Chap3/Chevron_b_double.pdf}
+    \caption{\textbf{(a)} data of the $eefg$ transition within a storage-storage pair with \textbf{(b)} relative fit}
+    \label{fig:Chev_data}
 \end{figure}
 
 In this context, it is necessary to calibrate the interaction between the $ee$ and $fg$ energy levels.
@@ -53,13 +60,6 @@ This operational point is given by
 \begin{equation}
     \widetilde{t} = \frac{1}{2 g_0}.
 \end{equation}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images//Chap3/Chevron_data.pdf}
-    \caption{Data of the $eefg$ sideband transition between the two storage qubits}
-    \label{fig:Chev_data}
-\end{figure}
 
 On \cref{fig:Chev_data} is also depicted the first oscillation period as a function of the detuning $\delta$, given by
 \begin{equation}

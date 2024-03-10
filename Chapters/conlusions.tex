@@ -1,0 +1,25 @@
+\chapter*{Conclusions}
+\markboth{CONCLUSIONS}{}
+\addcontentsline{toc}{chapter}{Conclusions}
+\label{chap:conclusions}
+\thispagestyle{fancy}
+
+In conclusion, this report explored various aspects of quantum information processing using superconducting qubits, as employed within the Quantum Device Lab. 
+We provided an overview of superconducting qubits, with a particular focus on transmon qubits and a device used for the generation of entangled photons travelling through a waveguide.
+
+In \cref{chap:crosstalk}, we addressed the issue of microwave signal crosstalk, frequently encountered in superconducting qubit systems.
+Our approach, inspired by the work of Nuerbolati \emph{et al.} \cite{crosstalk}, aimed to mitigate crosstalk by measuring the AC Stark shift on a qubit induced by signals intended for other qubits through a Ramsey experiment.
+
+Our investigation began with the detection of crosstalk between a target qubit and a control drive not directly capacitively coupled to the target qubit.
+We estimated a crosstalk level of approximately $21.3\%$ between the gate line of the control qubit and the target qubit.
+
+Subsequently, we characterized the compensation signal to be sent to the target qubit using flat top pulses to cancel the crosstalk.
+Optimal compensation parameters were determined and the successful cancellation of crosstalk was verified through Ramsey and Rabi experiments.
+We then repeated the process using Gaussian-shaped pulses and once again, successful crosstalk cancellation was confirmed using Ramsey and Rabi experiments.
+
+In \cref{chap:2_qubit_gates}, we developed a model for the interaction between sidebands of the entangled system of two qubits. 
+These results were employed to calibrate and determine the optimal frequency and duration of interaction between the two qubits, in order to implement two-qubit gates between storage-storage and storage-emitter qubits.
+
+Finally, in \cref{Chap:graph_states}, we introduced graph states and their significance in quantum computation and communication.
+Specifically, we introduced a particular type of graph state: the tree graph state.
+We elucidated how this particular graph state can be generated using our current chip and its importance for applications such as implementing a photon-loss-tolerant one-way quantum repeater.

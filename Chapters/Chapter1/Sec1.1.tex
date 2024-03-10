@@ -24,7 +24,7 @@ To introduce the implementation of the qubit utilized in our laboratory, we begi
       \label{fig:Energy_spectrum}
     \end{minipage}
   \end{figure}
-The circuit diagram is illustrated in \cref{fig:LC}, depicting a system that emulates the behavior of a quantum oscillator.
+The circuit diagram is illustrated in \cref{fig:LC}, depicting a system behaves as a quantum oscillator.
 In classical physics, the Hamiltonian for a harmonic oscillator is expressed as follows:
 \begin{equation}
     H = \frac{\phi^2}{2L} + \frac{Q^2}{2C},
@@ -39,20 +39,14 @@ The resulting quantum Hamiltonian, expressed in second quantization form, is giv
 where $\omega = 1/\sqrt{LC}$ is the resonance frequency of the circuit.
 The operators $\hat{a}^\dagger$ and $\hat{a}$ correspond to the creation and annihilation operators of excitations, respectively. 
 In this scenario, the excitations represent the difference in the number of charges between the two plates of the capacitor.
-Utilizing this quantum description of the LC circuit, we obtain the energy spectrum illustrated in \cref{fig:Energy_spectrum} ($\phi_0 = h/2e$ is the flux quantum) .
-The quantization of energy levels in relation to the magnetic flux $\phi$ is clearly evident in the figure.
+Utilizing this quantum description of the LC circuit, we obtain a quantized energy spectrum in relation to the magnetic flux $\phi$, as illustrated in \cref{fig:Energy_spectrum} ($\phi_0 = h/2e$ is the flux quantum).
 
-\subsection{The transmon resonator}
+\subsection{The transmon qubit}
 
-The issue of energy level harmonicity poses a challenge when aiming to construct a quantum processor. 
-In this context, determining the specific transitions being driven becomes uncertain, as the energy differences between consecutive levels remain identical.
-To address this, we introduce non-linearity into our circuit through the incorporation of the Josephson junction \cite{JOSEPHSON}.
-
-Josephson demonstrated that a current without dissipation could flow between two superconducting electrodes when separated by a thin insulating barrier. Specifically, he established that this supercurrent is determined by
-\begin{equation}
-    I = I_c \sin(\varphi),
-\end{equation}
-where $I_c$ represents the critical current of the junction, and $\varphi$ denotes the phase difference between the superconducting condensates on each side of the junction.
+The issue of having evenly spaced energy levels poses a challenge when aiming to operate this system as a qubit.
+In this context, it's impossible to solely drive the transition between states $\ket{0}$ and $\ket{1}$, as the energy differences between consecutive levels remain identical even for higher levels.
+To address this, we introduce a non-linearity into our circuit by replacing the inductor with a Josephson junction \cite{JOSEPHSON} (see \cref{fig:JJ_circuit}).
+The resulting potential becomes a cosine potential, leading to non-equidistant energy levels, as illustrated in \cref{fig:Energy_spectrum_JJ}.
 \begin{figure}
     \begin{minipage}[b]{0.5\linewidth}
       \centering
@@ -71,8 +65,7 @@ where $I_c$ represents the critical current of the junction, and $\varphi$ denot
     \end{minipage}
   \end{figure}
 
-By replacing the inductor of the LC resonator with a Josephson junction (\cref{fig:JJ_circuit}), we achieve the desired anharmonicity of the energy levels.
-The resulting potential becomes a cosine potential, leading to non-equidistant energy levels, as illustrated in \cref{fig:Energy_spectrum_JJ}.
+%By replacing the inductor of the LC resonator with a Josephson junction (\cref{fig:JJ_circuit}), we achieve the desired anharmonicity of the energy levels.
 To gain a deeper insight into the origin of this anharmonicity, we present the Hamiltonian of the Josephson junction resonator in second quantization formalism:
 \begin{equation}
 \label{eq:cosina_H}
@@ -87,14 +80,13 @@ where
 is the charging energy and $C_\Sigma = C_J + C_C$ is the total capacitance.
 The Hamiltonian described in \cref{eq:cosina_H} essentially represents an harmonic oscillator incorporating an anharmonicity correction. 
 This allows us to address individual energy levels separately.
-
 This arrangement is employed in quantum computation, utilizing the first two energy levels, $\ket{g}$ and $\ket{e}$, for encoding quantum state information. 
 Typically, the $\ket{f}$ state is utilized as an auxiliary energy level during the implementation of certain operations.
 
-In our laboratory, the transmon qubit is realized through the Josephson junction resonator under specific conditions known as the \emph{transmon regime} \cite{transmon_regime}.
+In our laboratory, the transmon qubit is realized through the Cooper Pair Box under specific conditions known as the \emph{transmon regime} \cite{transmon_regime}.
 
 An advantageous adaptation of the transmon artificial atom is the flux-tunable transmon, in which the single Josephson junction is substituted with two parallel junctions, forming a superconducting quantum interference device (SQUID).
-\begin{figure}
+\begin{figure}[b]
     \begin{minipage}[b]{0.5\linewidth}
       \centering
       \include{Figures/Chap1/transmon_diagram}
@@ -111,12 +103,12 @@ An advantageous adaptation of the transmon artificial atom is the flux-tunable t
     \end{minipage}
   \end{figure}
 
-Replacing the Josephson junction with a SQUID loop introduces a flux-dependent Josephson energy, $E_J(\Phi_\text{ext})$ (see \cref{fig:transmon_circuit}).
+This loop introduces a flux-dependent Josephson energy, $E_J(\Phi_\text{ext})$ (see \cref{fig:transmon_circuit}).
 Consequently, this results in a flux-tunable transmon frequency 
 \begin{equation}
-    \omega_q(\Phi_\text{ext}) = \sqrt{8 E_C|E_J(\Phi_\text{ext})|} - E_C/\hbar^3.
+    \hbar \omega_q(\Phi_\text{ext}) = \sqrt{8 E_C|E_J(\Phi_\text{ext})|} - E_C.
 \end{equation}
-In practical terms, the transmon frequency can be dynamically tuned by up to $\SI{1}{\giga\hertz}$ \cite{di_carlo}.
+In practical terms, the transmon frequency can be dynamically tuned by up to $\SI{1}{\giga\hertz}$ in as little as $\SI{20}{ns}$ \cite{di_carlo}.
 The magnetic flux within the SQUID loop is produced and regulated by the current flowing through the \emph{flux line}, a nearby waveguide adjacent to the SQUID loop.
 
 In our laboratory, we employ star-shaped transmon qubits \cite{transmon_qubits}, similar to the one depicted in \cref{fig:star_transmon}.

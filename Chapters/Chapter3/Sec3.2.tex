@@ -4,8 +4,8 @@
 In \cref{chap:2_qubit_gates}, we delved into the protocols employed to implement two-qubit gates on our device.
 Additionally, we explored the constraints that limit our ability to execute certain other gate operations.
 
-This section provides a deeper exploration of gates applied to graph states. 
-Frequently, rather than directly applying the specific gate, we utilize an alternative operation that produces an equivalent effect for a particular initial state.
+This section provides a deeper exploration of the effect of certain gates on graph states. 
+Frequently, rather than directly applying a specific gate, we utilize an alternative operation that produces an equivalent effect for a particular initial state.
 
 For instance, the Hadamard gate $H$ and a $\pi / 2$ rotation around the $y$ axis are different gates, as we can see from the different unitary matrices
 \begin{equation}
@@ -91,14 +91,14 @@ If our aim is to replicate the functionality of the following circuit
 \begin{equation}
 \label{eq:SWAP_circuit}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{1}   & \qw      & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \swap{1} & \qw \\
-      \lstick{$\ket{0}_3$} & \gate[style={fill=blue!10}]{H} & \qw        & \targX{} & \qw
+      \lstick{$\ket{0}_{S1}$} & \gate{H} & \ctrl{1}   & \qw      & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{H} & \control{} & \swap{1} & \qw \\
+      \lstick{$\ket{0}_{E2}$} & \gate[style={fill=blue!10}]{H} & \qw        & \targX{} & \qw
     \end{quantikz}
 \end{equation}
 we need to examine the changes occurring in the entanglement between qubits 1 and 2.
 A visual representation is provided in \cref{fig:SWAP_graph}.
-The SWAP gate effectively transfers the entanglement between the qubits, similarly to a simple swap in the numbering of the two qubits.
+The SWAP gate effectively exchanges the entanglement between the qubits, similarly to a simple swap in the numbering of the two qubits.
 
 \begin{figure}
     \centering
@@ -109,37 +109,36 @@ The SWAP gate effectively transfers the entanglement between the qubits, similar
 \end{figure}
 
 Another aspect to consider is that we primarily implement the SWAP gate between a storage and an emitter. 
-Consequently, in our example, we will define qubit 3 as the emitter qubit. 
-This means we're unable to perform single-qubit gates on it due to its rapid state decay.
-We can execute the SWAP gate of \cref{fig:SWAP_graph} and generate an analogue final state by running the following protocol
+Furthermore, recall that we are unable to perform single-qubit gates on the emitter qubit due to its rapid decay.
+We can execute the SWAP gate of \cref{fig:SWAP_graph} and generate an analogous final state by running the following protocol
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{Y_+} & \ctrl{1}   & \qw      & \qw                & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{Y_+} & \control{} & \swap{1} & \gate[style={fill=blue!10}]{Y_+} & \qw \\
-      \lstick{$\ket{0}_3$} & \qw                & \qw        & \targX{} & \qw                & \qw
+      \lstick{$\ket{0}_{S1}$} & \gate{Y_+} & \ctrl{1}   & \qw      & \qw                & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{Y_+} & \control{} & \swap{1} & \gate[style={fill=blue!10}]{Y_+} & \qw \\
+      \lstick{$\ket{0}_{E2}$} & \qw                & \qw        & \targX{} & \qw                & \qw
     \end{quantikz}
 \end{equation}
 In the circuit architecture, the SWAP gate basically transfers both the state and the entangling bonds from qubit 2 to qubit 3.
-Consequently, to achieve the state represented in \cref{eq:SWAP_circuit}, we need to further apply a Hadamard gate (or a $y$ rotation) on qubit 2 to bring it to the state $\ket{+}$.
+Consequently, to achieve the state represented in \cref{eq:SWAP_circuit}, we need to further apply a Hadamard gate (or a $y$ rotation) on storage qubit 2 to bring it to the state $\ket{+}$.
 
 \subsection{CNOT}
 
-The situation changes once more when dealing with the CNOT gate.
+The same situation applies when dealing with the CNOT gate.
 The following equivalence between the resulting quantum states can be easily checked:
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{2}   & \qw         & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{H} & \qw        & \ctrl{1}    & \qw \\
-      \lstick{$\ket{0}_3$} & \gate{H} & \control{} & \control{}  & \qw
+      \lstick{$\ket{0}_{S}$} & \gate{H} & \ctrl{2}   & \qw         & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{H} & \qw        & \ctrl{1}    & \qw \\
+      \lstick{$\ket{0}_{E2}$} & \gate{H} & \control{} & \control{}  & \qw
     \end{quantikz}
     \; = \;
     \begin{quantikz} 
-      \lstick{$\ket{0}_1$} & \gate{H} & \ctrl{1}   & \qw      & \qw      & \qw \\
-      \lstick{$\ket{0}_2$} & \gate{H} & \control{} & \ctrl{1} & \gate{H} & \qw \\
-      \lstick{$\ket{0}_3$} & \qw      & \qw        & \targ{}  & \qw      & \qw
+      \lstick{$\ket{0}_{S1}$} & \gate{H} & \ctrl{1}   & \qw      & \qw      & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{H} & \control{} & \ctrl{1} & \gate{H} & \qw \\
+      \lstick{$\ket{0}_{E2}$} & \qw      & \qw        & \targ{}  & \qw      & \qw
     \end{quantikz}
 \end{equation}
-Thus, the CNOT gate, followed by an Hadamard, effectively transfers all entanglement from the control qubit to the target qubit, while also entangling the two qubits, as depicted in \cref{fig:CNOT_graph}.
+Thus, the CNOT gate, followed by an Hadamard, effectively transfers all preexisting entanglement bonds from the control qubit to the target qubit, while also entangling the two, as depicted in \cref{fig:CNOT_graph}.
 
 \begin{figure}
     \centering
@@ -153,13 +152,12 @@ It's worth noting that the equivalence is solely between outcomes, assuming the 
 In practice, the unitary matrices representing the actions of the two circuits would differ.
 
 To replicate the action of this gate and achieve the same resulting graph state, precise attention must be paid to the phase signs in rotations around the $y$ axis.
-We will maintain the assumption that qubit 3 serves as an emitter qubit, as previously established in the case of the SWAP gate.
 The executable sequence of gates on our device is the following:
 \begin{equation}
     \begin{quantikz}
-      \lstick{$\ket{0}_1$} & \gate{Y_+}  & \ctrl{1}   & \qw         & \qw                 & \qw \\
-      \lstick{$\ket{0}_2$} & \gate[style={fill=red!10}]{Y_-} & \control{} & \ctrl{1}    & \gate{Y_+} & \qw \\
-      \lstick{$\ket{0}_3$} & \qw                 & \qw        & \targ{}     & \qw                 & \qw
+      \lstick{$\ket{0}_{S}$} & \gate{Y_+}  & \ctrl{1}   & \qw         & \qw                 & \qw \\
+      \lstick{$\ket{0}_{S2}$} & \gate{Y_-} & \control{} & \ctrl{1}    & \gate{Y_+} & \qw \\
+      \lstick{$\ket{0}_{E2}$} & \qw                 & \qw        & \targ{}     & \qw                 & \qw
     \end{quantikz}
 \end{equation}
 

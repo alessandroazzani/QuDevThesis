@@ -3,4 +3,36 @@
 \addcontentsline{toc}{chapter}{Introduction}
 \label{chap:intro}
 
-Here you write the introduction
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\thispagestyle{fancy}
+
+In the ever-evolving landscape of quantum information processing, the emergence of quantum computers has sparked immense excitement and curiosity among scientists, researchers, and technologists worldwide.
+Theoretical physicist Richard Feynman brought attention to this insight in the early 1980s.
+He notably argued that classical computers faced inefficiencies when simulating quantum mechanics \cite{Feynman}. 
+Drawing from the groundbreaking contributions of Ed Fredkin and Tomasso Toffoli \cite{Ed_tommy}, Feynman introduced an alternative computational model that exploited the fundamental principles of quantum mechanics.
+
+Unlike classical computers that rely on bits to represent information as either 0 or 1, quantum computers leverage the principles of quantum mechanics to manipulate quantum bits or \emph{qubits}.
+One of the most intriguing aspects of quantum computing is its potential to revolutionize fields ranging from cryptography and drug discovery to optimization problems and artificial intelligence.
+
+In addition to quantum computing, quantum communication \cite{Quantum_communication} represents another frontier in quantum technology that holds tremendous promise for secure and efficient data transmission.
+Entangled photons, central in quantum communication, enable protocols like quantum teleportation \cite{Quantum_teleportation} and quantum cryptography. 
+Exploiting the entanglement of photon pairs, researchers have demonstrated secure information transmission over extended distances, laying the foundation for quantum-secured communication networks.
+
+In our research team, we aim to generate entangled photons in states as the tensor-network states \cite{tensor_networks}.
+Utilizing a chip equipped with four transmon superconducting qubits, we allocate two qubits for the creation and entanglement of matter-based qubits, while the remaining two are for emitting the qubit states into the emission line as flying photons. 
+This approach enables us to successfully generate 2D cluster states \cite{HernandezAnton2023}.
+These states find applications across various domains, including measurement-based quantum computing (MBQC) \cite{MBQC, MBQC_3}, quantum communication \cite{Quantum_communication}, metrology \cite{metrology}.
+
+In this project, we tackled the issue of microwave signal crosstalk \cite{Crosstalk_intro_1, crosstalk_intro_2, signal_crosstalk}, which is a common challenge in working with superconducting circuits.
+Our aim was to eliminate this effect to improve the accuracy of our chip.
+Starting from existing research \cite{crosstalk} and exploring our own ideas, we pursued various strategies to address this issue.
+
+Following this, we focused on modeling interactions between pairs of qubits, enabled by tunable couplers.
+This allowed us to fine-tune the calibration of interactions between qubit pairs, an important step in implementing two-qubit gates.
+
+Finally, we investigated the feasibility of implementing a specific type of photonic graph state: the \emph{tree graph state}.
+These graph-state-based quantum repeaters \cite{Why_tree_graph_state} offer a promising solution by utilizing quantum encoding to mitigate challenges such as photon losses and operational errors, thereby reducing the reliance on extensive quantum memory coherence times.
+We find a protocol to generate such graph states using one of our existing devices.
+
+\textcolor{red}{Add a paragraph saying explicitly what each section is about, or refer to specific sections in the previous three paragraphs}

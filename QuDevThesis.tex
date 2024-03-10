@@ -16,6 +16,7 @@
 %Start counting in roman numbers
 \pagenumbering{roman}
 
+\pagestyle{plain}
 %Table of content
 \begingroup
     \hypersetup{linkcolor=black}
@@ -27,7 +28,6 @@
 
 \include{Chapters/introduction}
 %Start counting in arabic numbers
-\pagenumbering{arabic}
 
 \input{Chapters/Chapter1/Chap1}
 \input{Chapters/Chapter2.0/Chap2.0}
@@ -35,23 +35,13 @@
 \input{Chapters/Chapter3/Chap3}
 \input{Chapters/Chapter4/Chap4}
 
-\chapter*{Conclusions}
-\markboth{CONCLUSIONS}{}
-\addcontentsline{toc}{chapter}{Conclusions}
-\label{chap:conclusions}
-
-Here you write the conclusions.
-
-\chapter*{Acknowledgments}
-\markboth{Acknowledgments}{}
-\addcontentsline{toc}{chapter}{Acknowledgments}
-\label{chap:Acknowledgments}
-
-Here you write the Acknowledgments.
+\input{Chapters/conlusions}
+\input{Chapters/aknowledgments}
 
 
 
 %Print bibliography
+\pagestyle{plain}
 \printbibliography[heading=bibintoc]
 
 \thispagestyle{plain}
