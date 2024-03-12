@@ -20,19 +20,18 @@ Entangled photons, central in quantum communication, enable protocols like quant
 Exploiting the entanglement of photon pairs, researchers have demonstrated secure information transmission over extended distances, laying the foundation for quantum-secured communication networks.
 
 In our research team, we aim to generate entangled photons in states as the tensor-network states \cite{tensor_networks}.
-Utilizing a chip equipped with four transmon superconducting qubits, we allocate two qubits for the creation and entanglement of matter-based qubits, while the remaining two are for emitting the qubit states into the emission line as flying photons. 
+Utilizing a chip equipped with four transmon superconducting qubits, we allocate two qubits for the creation and entanglement of matter-based qubits, while the remaining two are for emitting the qubit states into the emission line as flying photons, as it will be discussed in \cref{Chap:experimental}. 
 This approach enables us to successfully generate 2D cluster states \cite{HernandezAnton2023}.
 These states find applications across various domains, including measurement-based quantum computing (MBQC) \cite{MBQC, MBQC_3}, quantum communication \cite{Quantum_communication}, metrology \cite{metrology}.
 
 In this project, we tackled the issue of microwave signal crosstalk \cite{Crosstalk_intro_1, crosstalk_intro_2, signal_crosstalk}, which is a common challenge in working with superconducting circuits.
-Our aim was to eliminate this effect to improve the accuracy of our chip.
+Our aim was to eliminate this effect to achieve higher operation accuracy on our chip.
 Starting from existing research \cite{crosstalk} and exploring our own ideas, we pursued various strategies to address this issue.
+The strategy and results will be discussed in \cref{chap:crosstalk}.
 
-Following this, we focused on modeling interactions between pairs of qubits, enabled by tunable couplers.
+Following this, in \cref{chap:2_qubit_gates} we focused on modeling interactions between pairs of qubits, enabled by tunable couplers.
 This allowed us to fine-tune the calibration of interactions between qubit pairs, an important step in implementing two-qubit gates.
 
-Finally, we investigated the feasibility of implementing a specific type of photonic graph state: the \emph{tree graph state}.
+Finally, in \cref{Chap:graph_states} we investigated the feasibility of implementing a specific type of photonic graph state: the \emph{tree graph state}.
 These graph-state-based quantum repeaters \cite{Why_tree_graph_state} offer a promising solution by utilizing quantum encoding to mitigate challenges such as photon losses and operational errors, thereby reducing the reliance on extensive quantum memory coherence times.
 We find a protocol to generate such graph states using one of our existing devices.
-
-\textcolor{red}{Add a paragraph saying explicitly what each section is about, or refer to specific sections in the previous three paragraphs}

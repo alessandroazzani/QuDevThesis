@@ -78,7 +78,7 @@ headheight=3cm,
 \fancyfoot{}
 \setlength{\footskip}{1.5cm}
 \renewcommand\footrule{
-  \begin{minipage}{\textwidth}
+  \begin{minipage}{\textwidth} 
     \centering
     \begin{tikzpicture} % Rememmber to put 2000 samples at the end, nto now bc it's slowing doen a lot
       \draw[black, domain=-6.9:6.9, samples=2000] plot (\x, {0.4*cos(25*\x r) * exp(-3*\x*\x)});
@@ -86,7 +86,7 @@ headheight=3cm,
     \vspace{-0.6cm}
   \end{minipage}\par}%
 \renewcommand{\footrulewidth}{0pt}
-\fancyfoot[R]{\thepage}
+\fancyfoot[LE,RO]{\thepage} 
 
 %Chapters and sections' format ---------------------------
 % \titleformat{\chapter}[display]
