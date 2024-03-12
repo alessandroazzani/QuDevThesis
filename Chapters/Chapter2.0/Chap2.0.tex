@@ -1,4 +1,4 @@
-\chapter{Crosstalk cancellation}
+\chapter{Crosstalk Cancellation}
 \label{chap:crosstalk}
 \thispagestyle{fancy}
 
@@ -41,7 +41,7 @@ This method allows for effective characterization even with long signals, provid
 For this reason, we decided to assess the impact of the control drive on the target qubit by conducting Ramsey experiments, by measuring the induced AC stark shift on the target qubit.
 \end{comment}
 
-\section{Detecting crasstalk with Rabi measurements}
+\section{Detecting Crosstalk with Rabi Measurements}
 
 \begin{figure}[t!]
     \centering
@@ -85,7 +85,7 @@ Next, we discuss a variant of the protocol introduced, where pulse shapes more r
 
 %Consequently, to effectively demonstrate and subsequently cancel this crosstalk phenomenon using our method, we may need to employ techniques to amplify its effect.
 
-\section{Measuring crosstalk with AC Stark shift}
+\section{Measuring Crosstalk with AC Stark shift}
 
 As already introduced in the previous section, to characterize and verify the successful cancellation of crosstalk in our device, we measure its effect as induced AC Stark shift on the target qubit.
 The off-resonant control drive induces a frequency shift given by
@@ -101,7 +101,7 @@ This frequency shift effectively changes the operating frequency of the target q
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\subsection{Measurement protocol}
+\subsection{Measurement Protocol}
 
 To characterize the crosstalk we implement the gate sequence depicted in \cref{fig:pulse_train_flattop}.
 We run a Ramsey sequence on the target qubit, therefore the initial and the final gates executed are $\pi/2$-gates.
@@ -120,7 +120,7 @@ Our goal is to identify the optimal parameters $\Vec{r} = r e^{i\Delta \phi}$ su
     \label{fig:pulse_train_flattop}
 \end{figure}
 
-\subsection{Measurement results}
+\subsection{Measurement Results}
 
 \begin{figure}
     \centering
@@ -194,7 +194,7 @@ The central point was determined based on its symmetry.
 We assessed the symmetry of the data around various points and selected the one exhibiting the most central symmetry as the center of the rings.
 In this case, the cancellation parameters has been found to be $r_0 = 0.040$ and $\Delta \phi_0 = 125.3^\circ$.
 
-\subsection{Verify compensation}
+\subsection{Verify Compensation}
 
 Next, we investigate whether the method for finding the compensation signal is effective.
 We conduct experiments similar to those illustrated in \cref{fig:pulse_train_flattop}, both with and without the compensation pulse determined during the characterization phase.
@@ -204,13 +204,36 @@ We anticipate observing an sinusoidal pattern for constant driving pulse amplitu
 Without the compensation pulse, we expect to observe a shift in the origin of the oscillations, resulting from a change in the frequency of the target qubit due to AC Stark shift.
 This frequency shift is anticipated to follow \cref{eq:stark_ac}. 
 Finally, if the compensation parameters are functioning correctly, we do not expect to observe this shift when the compensation is applied.
-The results are shown in \cref{fig:Ramsey_cancellation}.
+The results are shown in \hyperref[fig:Ramsey_cancellation]{Fig.~\ref{fig:Ramsey_cancellation}a,b}.
+
+\begin{comment}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{Images/Chap2.0/Ramsey_cancellatoin.pdf}
+        \label{fig:Ramsey_cancellation}
+        \caption{something}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0\textwidth}
+        \label{fig:subfig_b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0\textwidth}
+        \label{fig:Ramsey_freq}
+    \end{subfigure}
+    \vspace{-1cm}
+    \caption{Ramsey experiment sweeping recovery pulse's phase $\varphi$ and control drive's amplitude $A$. The results are shown for the run \textbf{(a)} without and \textbf{(b)} with the compensation signal}
+    \label{fig:three_subfigures}
+\end{figure}
+\end{comment}
 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{Images/Chap2.0/Ramsey_cancellatoin.pdf}
-    \vspace{-1cm}
-    \caption{Ramsey experiment sweeping recovery pulse's phase $\varphi$ and control drive's amplitude $A$. The results are shown for the run \textbf{(a)} without and \textbf{(b)} with the compensation signal}
+    \vspace{-0.5cm}
+    \caption{Ramsey experiment sweeping recovery pulse's phase $\varphi$ and control drive's amplitude $A$. The results are shown for the run \textbf{(a)} without and \textbf{(b)} with the compensation signal. \textbf{(c)}  shows frequency shift due to control drive, as a function of control drive's amplitude, either with or without applying the compensation signal on the target qubit.}
     \label{fig:Ramsey_cancellation}
 \end{figure}
 
@@ -221,16 +244,18 @@ Converting this fitted phase into a frequency as
     \text{frequency} = \frac{\text{phase shift}}{2 \pi \cdot \tau} ,
 \end{equation}
 reveals the behavior of the target qubit's frequency in relation to the control amplitude.
-The outcomes are illustrated in \cref{fig:Ramsey_freq}.
+The outcomes are illustrated in \hyperref[fig:Ramsey_cancellation]{Fig.~\ref{fig:Ramsey_cancellation}c}.
 In the absence of compensation parameters, the data follows to a parabolic behaviour, as predicted by \cref{eq:stark_ac}.
 However, when the compensation pulse is applied, the extracted frequency shift remains roughly constant.
 
+\begin{comment}
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{Images//Chap2.0/frequencies.pdf}
     \caption{Frequency shift due to control drive, as a function of control drive's amplitude, either with or without applying the compensation signal on the target qubit}
     \label{fig:Ramsey_freq}
 \end{figure}
+\end{comment}
 
 Finally, we confirm the successful cancellation of crosstalk also using a Rabi experiment. 
 However, it is known that off-resonant signals induce minimal population changes on the target qubit. 
@@ -255,7 +280,7 @@ Instead, it is effectively maintained in the ground state.
     \label{fig:Rabi_flattop_canc}
 \end{figure}
 
-\subsection{Measuring with Gaussian-shaped pulses}
+\section{Measuring with Gaussian-shaped Pulses}
 \label{sec:gaussian_shaped}
 
 Ultimately, we iterate through the procedure once more, this time implementing Gaussian-shaped single-qubit pulses.
@@ -285,9 +310,9 @@ Lastly, we measure the excited state population of the target qubit.
 We expect a sudden transition in the data, attributed to the non-commutativity of rotations around the Bloch sphere.
 Subsequent to this, we employ curve fitting using an error function to determine the optimal delay time.
 In our configuration, the optimal delay time was determined to be $\tau_d = \SI{-1.41}{ns}$.
-The data is shown in \cref{fig:delay}
+The data is shown in \cref{fig:delay}.
 
-\begin{figure}[b!]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{Images//Chap2.0/delay.pdf}
     \vspace{-0.5cm}
@@ -325,33 +350,28 @@ However, in the current setup, we continuously excite and de-excite the control 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Images//Chap2.0/Ramsey_cancellatoin_pulsed.pdf}
-    \vspace{-1cm}
-    \caption{Ramsey experiment varying the phase of the recovery pulse $\varphi$ and the amplitude of the control drive $A$. Results are depicted \textbf{(a)} without and \textbf{(b)} with the compensation pulse.}
+    \vspace{-0.5cm}
+    \caption{Ramsey experiment varying the phase of the recovery pulse $\varphi$ and the amplitude of the control drive $A$. Results are depicted \textbf{(a)} without and \textbf{(b)} with the compensation pulse. \textbf{(c)} shows the frequency shift due to the 200 $\pi$-pulses on the control qubit, as a function of the drive amplitude, both with and without applying the compensation signal.}
     \label{fig:RAMSEY_can_pulsed}
 \end{figure}
 
 We validate that the parameters obtained in the pulsed scenario effectively mitigate crosstalk.
 Once more, we initiate with a Ramsey measurement.
 For this, 200 $\pi$-pulses instead of $50$ were implemented in sequence.
-The corresponding dataset is presented in \cref{fig:RAMSEY_can_pulsed}.
+The corresponding dataset is presented in \hyperref[fig:RAMSEY_can_pulsed]{Fig.~\ref{fig:RAMSEY_can_pulsed}a,b}.
 In this scenario, it's important to note that while we continue to refer to them as $\pi$-pulses, due to the variation in their amplitude, they no longer precisely correspond to $\pi$-pulses on the control qubit.
 
+\begin{comment}
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.75\linewidth]{Images//Chap2.0/frequencies_200.pdf}
     \caption{Frequency shift due to the 200 $\pi$-pulses on the control qubit, as a function of the drive amplitude, both with and without applying the compensation signal}
     \label{fig:Freq_pulsed}
 \end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{Images//Chap2.0/Rabi_pulsed_cancellation.pdf}
-    \caption{$\ket{e}$ population of target qubit as a function of the drive amplitude, both with and without compensation pulses}
-    \label{fig:Rabi_canc_pulsed}
-\end{figure}
+\end{comment}
 
 A similar analysis is performed on the dataset, involving fitting the data with a cosine wave for each driving amplitude to calculate the frequency shift once more using \cref{eq:get_frequency}.
-The outcomes of this analysis are illustrated in \cref{fig:Freq_pulsed}.
+The outcomes of this analysis are illustrated in \hyperref[fig:RAMSEY_can_pulsed]{Fig.~\ref{fig:RAMSEY_can_pulsed}c}.
 
 On this occasion, the observed cancellation appears to be imperfect.
 Our hypothesis suggests that this may be attributed to the shorter duration of the pulses, resulting in a broader bandwidth in Fourier space.
@@ -363,9 +383,19 @@ Once again, we move the target qubit to be resonant with the drive while simulta
 The population data of the excited state $\ket{e}$ for the target qubit is presented as a function of the drive amplitude in \cref{fig:Rabi_canc_pulsed}.
 We clearly observe how, in this instance as well, the crosstalk effect is effectively neutralized using our method.
 
-Our interpretation of the “beating" pattern observed in the plot of \cref{fig:Rabi_canc_pulsed} is as follows: the rapid switching on and off of the interaction between the control drive and the target qubit causes the target qubit frequency to lag behind the induced AC Stark frequency.
-This temporal non-adiabaticity results in the generation of the observed beating pattern.
+Our interpretation of the “beating" pattern observed in the plot depicted in \cref{fig:Rabi_canc_pulsed} is as follows: applying the control drive induces Rabi oscillations on the target qubit.
+However, the control drive is switched off before the target qubit can fully reach the excited state.
+Consequently, the target qubit experiences multiple rapid not-complete Rabi oscillations, leading to the observed beating pattern in the plot.
+%causes the target qubit frequency to lag behind the induced AC Stark frequency.
+%This temporal non-adiabaticity results in the generation of the observed beating pattern.
 
 The observed dependencies of the rings in \cref{fig:circle_pulsed} on the phase of the compensation pulse $\Delta \phi$ may be attributed to the non-adiabatic effect or the broader bandwidth of the pulses in Fourier space. 
 Additionally, the incomplete cancellation of the ZZ interaction between the qubits could also contribute to this phenomenon.
 However, despite these hypotheses, a definitive model and explanation for the observed data pattern have yet to be established.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images//Chap2.0/Rabi_pulsed_cancellation.pdf}
+    \caption{$\ket{e}$ population of target qubit as a function of the drive amplitude, both with and without compensation pulses}
+    \label{fig:Rabi_canc_pulsed}
+\end{figure}
